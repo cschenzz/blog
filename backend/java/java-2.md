@@ -101,7 +101,8 @@ private final BiFunction<List<Dict>, String, Dict> funQuery = (dictList, keyWord
 };
 ```
 
-## 使用Tuple实现在函数返回多个值
+## 使用Tuple实现在函数中返回多个值
+> 参考python中元组tuple
 ```java
 import java.util.function.Function;
 import cn.hutool.core.lang.Tuple;
