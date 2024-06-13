@@ -1,4 +1,4 @@
-> mybatis-plus-boot-starter版本>=3.5.4
+> mybatis-plus-boot-starter版本>=3.5.7
 
 > package
 ```java

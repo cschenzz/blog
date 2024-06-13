@@ -1,7 +1,7 @@
 spring boot + mybatis plus 数据库crud示例
 实现restful接口, 包括分页, 列表, 添加, 修改, 删除数据
 
-> mybatis-plus-boot-starter版本>=3.5.4
+> mybatis-plus-boot-starter版本>=3.5.7
 
 > jdk17已用jakarta替代javax
 
@@ -717,7 +717,7 @@ public class SysUserServiceImpl implements ISysUserService {
         if (ids.isEmpty()) {
             return 0;
         }
-        return userMapper.deleteBatchIds(ids);
+        return userMapper.deleteByIds(ids);
     }
 
 }

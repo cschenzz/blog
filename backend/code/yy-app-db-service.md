@@ -1,6 +1,6 @@
 controller, interface, impl实现示例代码
 
-> mybatis-plus-boot-starter版本>=3.5.4
+> mybatis-plus-boot-starter版本>=3.5.7
 
 ## controller
 ```java
@@ -326,7 +326,7 @@ public class ServiceRegionServiceImpl implements IServiceRegionService {
         if (ids.isEmpty()) {
             return 0;
         }
-        return serviceRegionMapper.deleteBatchIds(ids);
+        return serviceRegionMapper.deleteByIds(ids);
     }
 
 }

@@ -1,6 +1,6 @@
 实际项目中使用到的app.service层数据常规操作代码, 比较适用于接口返回Dict类型数据情况, 然后结合ApiFox进行接口的调试及发布, 项目使用了java jdk17, 新语法: 默认接口, var变量推导, Function函数式接口
 
-> mybatis-plus-boot-starter版本>=3.5.4
+> mybatis-plus-boot-starter版本>=3.5.7
 
 > 代码中使用到的ExamQuestion实体类, mapper请参看实际项目
 
@@ -579,7 +579,7 @@ public class ExamQuestionServiceImpl implements IExamQuestionService {
         // --------------------------------------------
         // --------------------------------------------
         // int deleteRows = examQuestionMapper.delete(Wrappers.<ExamQuestion>lambdaQuery().eq(ExamQuestion::getStatus, 0).in(ExamQuestion::getId, ids));
-        return examQuestionMapper.deleteBatchIds(ids);
+        return examQuestionMapper.deleteByIds(ids);
     }
 
 }
