@@ -138,20 +138,25 @@ List<Dict> dictList = CollUtil.newArrayList(
         Dict.create().set("no", "c0002").set("name", "tom"),
         Dict.create().set("no", "x0001").set("name", "xxx")
 );
+// 1.根据条件判断列表是否存在指定元素
 boolean exist = dictList.stream().filter(o ->
         o.getStr("name").equals("tom")
 ).count() > 0;
-// 上面等价于dictList.stream().anyMatch(o -> o.getStr("name").equals("tom"))
+// 使用anyMatch实现同样功能
+// boolean exist = dictList.stream().anyMatch(o -> o.getStr("name").equals("tom"))
+// 其他判断可参考: anyMatch, allMatch, noneMatch
 log.info("dictList是否存在tom:{}", exist);
 
-// 使用IntStream实现判断集合中是否存在某个数
+
+// 2.使用IntStream实现判断集合中是否存在某个数
 Integer xx = 4096;
 long existCount = IntStream.of(5, 8, 9, 4096).filter(o -> o == xx).count();
 // 结果true
 log.info("exist={}", existCount > 0);
 // boolean exist = IntStream.of(5, 8, 9, 4096).anyMatch(oo -> oo == xx);
 
-// 判断状态是否是其中一种
+
+// 3.判断状态是否是其中一种
 // exist = true, 99999也存在集合中(集合中数值在这里为Integer类型)
 boolean exist = CollUtil.newArrayList(0, 1, 2, 3, 4, 99999).contains(3);
 ```
