@@ -147,14 +147,12 @@ boolean exist = dictList.stream().filter(o ->
 // 其他判断可参考: anyMatch, allMatch, noneMatch
 log.info("dictList是否存在tom:{}", exist);
 
-
 // 2.使用IntStream实现判断集合中是否存在某个数
 Integer xx = 4096;
 long existCount = IntStream.of(5, 8, 9, 4096).filter(o -> o == xx).count();
 // 结果true
 log.info("exist={}", existCount > 0);
 // boolean exist = IntStream.of(5, 8, 9, 4096).anyMatch(oo -> oo == xx);
-
 
 // 3.判断状态是否是其中一种
 // exist = true, 99999也存在集合中(集合中数值在这里为Integer类型)
