@@ -34,15 +34,15 @@
 - [Spring initializr](https://start.spring.io/)
 
 文档教程
-- [hutool文档](https://hutool.cn/docs)
-<!-- ==看云文档== -->
-- [语雀](https://www.yuque.com/)
+- [hutool文档](https://doc.hutool.cn/pages/index/) | [旧版](https://hutool.cn/docs)
 - [Spring Boot官方文档](https://spring.io/projects/spring-boot#learn)
 - [Spring Framework Documentation](https://docs.spring.io/spring-framework/reference/index.html)
 - [Spring Boot Reference Documentation(current)](https://docs.spring.io/spring-boot/docs/current/reference/html/)
 - [K8S中文文档](https://kubernetes.io/zh-cn/docs/home)
 - [MyBatis-Plus中文文档](https://baomidou.com)
 - [arthas文档](https://arthas.aliyun.com/)
+<!-- ==看云文档== -->
+- [语雀](https://www.yuque.com/)
 <!-- ======other===== -->
 - [菜鸟教程](https://www.runoob.com/)
 - [书栈网.开源免费书籍](https://www.bookstack.cn/)
