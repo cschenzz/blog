@@ -1,6 +1,6 @@
 ## 加速配置
 > 这里额外添加了docker的生产环境核心配置cgroup
-```shell
+```bash
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
@@ -18,7 +18,7 @@ sudo systemctl restart docker
 ```
 
 ## 找镜像
-```shell
+```bash
 #下载最新版
 docker pull nginx
 
@@ -45,7 +45,7 @@ docker rmi 056e9a39e8be
 ```
 
 ## 启动容器
-```shell
+```bash
 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 # docker run  设置项   镜像名, 镜像启动运行的命令（镜像里面默认有的，一般不会写）
@@ -119,6 +119,35 @@ docker cp 5eff66eec7e1:/etc/nginx/nginx.conf  /data/conf/nginx.conf
 # 把外面的内容复制到容器里面
 docker cp  /data/conf/nginx.conf  5eff66eec7e1:/etc/nginx/nginx.conf
 ```
+
+## 修改容器启动配置参数 
+
+有时候，我们创建容器时忘了添加参数 `--restart=always` ，当 Docker 重启时，容器未能自动启动
+
+现在要添加该参数怎么办呢，方法有二：
+
+1、Docker 命令修改
+```bash
+docker container update --restart=always 容器名字
+
+# 修改jenkins内存最大值
+docker container update --memory 500M --memory-swap=800M jenkins-jdk17
+```
+
+2、直接改配置文件
+首先停止容器，不然无法修改配置文件
+配置文件路径为：`/var/lib/docker/containers/容器ID`
+
+在该目录下找到一个文件 hostconfig.json ，找到该文件中关键字 RestartPolicy
+
+```bash
+# 修改前配置：
+"RestartPolicy":{"Name":"no","MaximumRetryCount":0}
+
+# 修改后配置：
+"RestartPolicy":{"Name":"always","MaximumRetryCount":0}
+```
+最后启动容器。
 
 ## 补充
 ```bash
