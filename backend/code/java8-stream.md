@@ -267,6 +267,10 @@ List<Dict> dictList = CollUtil.newArrayList(
         Dict.create().set("sku", "c").set("buy", 25).set("stock", 60).set("price", new BigDecimal("99.0"))
 );
 
+// Collectors.toMap, {"a":"库存:1000","b":"库存:50"}
+// Map<String, String> mapsSku = dictList.stream().filter(oo -> oo.getInt("buy") < 10).collect(Collectors.toMap(oo -> oo.getStr("sku"), oo -> "库存:" + oo.getInt("stock")));
+
+// ---------------------------
 // 1.根据条件过滤出单条记录(有多条也仅返回一条), 使用Optional包装
 Optional<Dict> optionalDict = dictList.stream().filter(oo -> {
     int stock = oo.getInt("stock");
