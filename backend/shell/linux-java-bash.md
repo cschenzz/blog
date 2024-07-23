@@ -83,8 +83,8 @@ wget -O gitea https://dl.gitea.io/gitea/1.8.0-rc1/gitea-1.8.0-rc1-linux-amd64
 # 显示详细信息(GET请求)
 curl -v http://localhost:8888
 
-# 下载文件,选项-o将下载数据写入到指定名称的文件中，并使用--progress显示进度条
-curl http://man.linuxde.net/test.iso -o filename.iso --progress
+# 下载文件,选项-o将下载数据写入到指定名称的文件中，并使用--progress-bar显示进度条
+curl http://man.linuxde.net/test.iso -o filename.iso --progress-bar
 
 # --------------------------
 # 启动项目
