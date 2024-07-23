@@ -85,6 +85,7 @@ curl -v http://localhost:8888
 
 # 下载文件,选项-o将下载数据写入到指定名称的文件中，并使用--progress-bar显示进度条
 curl http://man.linuxde.net/test.iso -o filename.iso --progress-bar
+curl --progress-bar -o xx-01.zip https://example.com/path/to/filename.zip
 
 # --------------------------
 # 启动项目
