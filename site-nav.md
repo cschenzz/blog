@@ -59,7 +59,7 @@
 ## 📝前端文档
 - [Vue3官方指南](https://cn.vuejs.org/guide/introduction.html)
 - [Element-Plus官网](https://element-plus.org/zh-CN/component/button.html) | [Gitee镜像](https://element-plus.gitee.io/zh-CN/)
-- [Vant UI文档(gitee)](https://vant-contrib.gitee.io/vant) | [github.io文档](https://vant-ui.github.io/vant/#/zh-CN) | [github](https://github.com/youzan/vant)
+- [Vant UI文档(github)](https://vant-ui.github.io/vant/#/zh-CN) | [gitee.io文档](https://vant-contrib.gitee.io/vant) | [github](https://github.com/youzan/vant)
 - [Tailwind CSS官网文档](https://tailwindcss.com/docs/installation) | [中文网](https://www.tailwindcss.cn)
 - [uni-app](https://uniapp.dcloud.net.cn/)
 - [ECharts使用手册](https://echarts.apache.org/handbook/zh/get-started/)

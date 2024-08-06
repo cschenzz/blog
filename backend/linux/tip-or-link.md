@@ -156,6 +156,7 @@ cowsay -f duck hello
 - 命令前加`sudo`提升权限执行
 - 退出(btop, htop, top, git log等退出): q
 - 启动btop后快捷键会以橙色显示, esc打开菜单, 可以查看帮助文档
+- `命令 --help`, `man 命令`查看命令的帮助文档, 如`ls --help`, `man ls`
 
 ## flatpak使用
 ```bash
