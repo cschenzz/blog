@@ -20,7 +20,7 @@
 - [阿里云-通义千问](https://tongyi.aliyun.com/qianwen/)
 - [抖音AI-豆包](https://www.doubao.com/)
 - [智谱清言AI](https://chatglm.cn/)
-- [腾讯-混元助手](https://hunyuan.tencent.com/bot/chat)
+- [腾讯元宝](https://yuanbao.tencent.com/)
 -------------------------------------------------------------------------------
 
 ## ☕技术社区及文档
