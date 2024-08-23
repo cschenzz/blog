@@ -12,7 +12,7 @@
 > JSON字符串返回前端处理
 ```java
 // json字符串转换成JSONObject, 默认为true(忽略null值), false不忽略null值
-cn.hutool.json.JSONObject jsonObject = cn.hutool.json.JSONUtil.parseObj(json, false);
+cn.hutool.json.JSONObject jsonObject = cn.hutool.json.JSONUtil.parseObj(jsonText, false);
 
 // 通过查看JSONUtil.wrap代码: jsonConfig.isIgnoreNullValue() ? null : JSONNull.NULL
 // 可以发现, 当json值为null时, 这里对null进行了转换, 转换成了JSONNull.NULL, 但是这在使用接口返回到前端时就会有问题
@@ -44,17 +44,17 @@ Dict dict = Dict.create()
         .set("id", 100L);
 
 // 对象转换成json字符串, 默认忽略null值
-String json = JSONUtil.toJsonStr(dict);
+String jsonStr = JSONUtil.toJsonStr(dict);
 // 使用JSONConfig配置json不忽略null值, 小数不去除末尾多余的0
 String jsonText = JSONUtil.toJsonStr(dict, JSONConfig.create().setIgnoreNullValue(false).setStripTrailingZeros(false));
-log.info("字符串json: {}, {}", json, jsonText);
+log.info("字符串json: {}, {}", jsonStr, jsonText);
 
 // json字符串转换成字典
-Dict beanDict = JSONUtil.toBean(json, Dict.class);
+Dict beanDict = JSONUtil.toBean(jsonStr, Dict.class);
 log.info("字典获取text: {}", beanDict.getStr("text"));
 
 // json字符串转换成JSONObject
-JSONObject jsonObject = JSONUtil.parseObj(json);
+JSONObject jsonObject = JSONUtil.parseObj(jsonStr);
 log.info("JSONObject获取id: {}", jsonObject.getLong("id"));
 String authorAvatar = jsonObject.getByPath("author.avatar", String.class);
 log.info("根据path获取avatar: {}", authorAvatar);
@@ -63,6 +63,25 @@ log.info("根据path获取avatar: {}", authorAvatar);
 String xmlStr = JSONUtil.toXmlStr(jsonObject);
 log.info("JSONObject转换成xml: {}", xmlStr);
 ```
+
+
+## JSONObject使用
+```java
+Person tmpPerson = new Person("孙悟空", 99);
+Dict tmpDict = Dict.create()
+        .set("address", "花果山水帘洞")
+        .set("skills", List.of("金箍棒", "筋斗云"));
+
+JSONObject jsonObject = new JSONObject();
+jsonObject.set("uid", 1);
+jsonObject.set("person", tmpPerson);
+jsonObject.set("extra_config", tmpDict);
+
+// {"uid":1,"person":{"name":"孙悟空","age":99},"extra_config":{"address":"花果山水帘洞","skills":["金箍棒","筋斗云"]}}
+Console.log(jsonObject.toString());
+Console.log(jsonObject.toStringPretty());
+```
+
 
 ## json数组解析
 ```java
