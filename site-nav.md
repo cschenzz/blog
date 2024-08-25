@@ -45,6 +45,7 @@
 - [语雀](https://www.yuque.com/)
 <!-- ======other===== -->
 - [菜鸟教程](https://www.runoob.com/)
+- [廖雪峰-Python3教程](https://www.liaoxuefeng.com/wiki/1016959663602400)
 - [书栈网.开源免费书籍](https://www.bookstack.cn/)
 - [WPS学堂](https://www.wps.cn/learning/)
 
