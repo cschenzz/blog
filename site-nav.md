@@ -53,6 +53,7 @@
 - [maven仓库](https://mvnrepository.com)
 - [Docker仓库](https://hub.docker.com/search?q=&type=image)
 - [NPM仓库](https://www.npmjs.com/)
+- [python包仓库](https://pypi.org/)
 - [清华大学镜像站](https://mirrors.tuna.tsinghua.edu.cn/)
 - [coding.net](https://coding.net/)
 -------------------------------------------------------------------------------
