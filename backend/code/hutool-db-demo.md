@@ -207,7 +207,7 @@ Number xCount = db.queryNumber("select count(1) as r from sys_user where create_
 // 插入数据并返回自增主键
 long id = db.insertForGeneratedKey(Entity.create("sys_user").set("name", "unitTestUser").set("age", 66));
 long pid = db.executeForGeneratedKey("insert into sys_user(name, age) values (?, ?)", "铠", 21);
-// 使用sql实现增删改
+// 使用sql实现增删改, execute方法返回影响行数
 // 新增
 int rows = db.execute("insert into sys_user values (?, ?, ?)", "张三", 59, 1);
 // 删除
@@ -228,7 +228,7 @@ log.debug("记录总数: {}, 页码: {}/{}, 每页显示: {}, result={}", result
 ## 事务
 ```java
 Db.use(getDs()).tx(txDb -> {
-    // 以下增删改都是针对表sys_user
+    // 以下增删改都是针对表sys_user, 以下execute, insert, update, del方法返回值为影响行数(插入/更新/删除)
     // 使用sql插入数据
     int rows = txDb.execute("insert into sys_user(name, age) values (?, ?)", "公孙离", 18);
     // 新增(表和字段)
