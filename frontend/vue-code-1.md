@@ -120,5 +120,28 @@ const person = {
 person.sayHello();
 ```
 
+
+## 异步请求方法
+```js
+import axios from 'axios'
+
+const __$_request_data = async () => {
+  const response = await axios.get('http://localhost:9900/cc/public/help')
+  // 使用 JSON.stringify() 方法可以将 JavaScript 对象转换为 JSON 字符串
+  // 将 JSON 字符串转换为 JavaScript 对象
+  console.log(1, '---', JSON.stringify(response, null, 2))
+  console.log(2, '---', JSON.stringify(response.data))
+  console.log(3, '---', response.data)
+}
+
+// onMounted(__$_request_data)
+
+// onMounted 的回调函数必须是一个 async 函数，这样你才能在里面使用 await
+onMounted(async () => {
+  const response = await axios.get('http://localhost:9900/cc/public/help')
+  console.log(3, '---', response.data)
+})
+```
+
 ---------------------
 - [Vue3 English](https://vuejs.org/)
