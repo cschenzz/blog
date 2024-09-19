@@ -1,31 +1,62 @@
 ## 表格table及操作示例
 ```js
 <script setup>
-import { ElButton, ElTable, ElTableColumn, ElImage, ElTag } from 'element-plus';
-import 'element-plus/dist/index.css';
+import { ElButton, ElImage, ElLink, ElPagination, ElTable, ElTableColumn, ElTag, ElNotification } from 'element-plus'
+import 'element-plus/dist/index.css'
 
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import axios from 'axios'
+import { onMounted, ref } from 'vue'
 
 // ----------------
+const currentPage = ref(1)
+const pageSize = ref(20)
+
+
+const __total = ref(0)
 const __list = ref([])
 
 const __$_request_data = async () => {
-  const response = await axios.get('http://localhost:9900/cc/public/test/t-00?t=2&p=2')
+  //   let para = {
+  //     pageNum: currentPage.value,
+  //     pageSize: pageSize.value
+  //   }
+
+  // 使用let定义url在这里仅作为使用示范
+  let request_url = 'http://localhost:9999/xxx/public/test/page?pageNum=' + currentPage.value + '&pageSize=' + pageSize.value
+
+  const response = await axios.get(request_url)
   console.log(1, '---', response.data)
-  __list.value = response.data.data
+  // 仅需读取值的变量建议使用const定义
+  const responseBody = response.data
+
+  __list.value = responseBody.data.records
+  __total.value = responseBody.data.total
 }
+
+
+
+const handleSizeChange = (value) => {
+  console.log(`${value} items per page`)
+  __$_request_data()
+}
+const handleCurrentChange = (value) => {
+  console.log(`current page: ${value}`)
+  __$_request_data()
+}
+
+
+
 
 const __handle_up_shelf = async (index, row) => {
   console.log(index, row)
   // ------------------
-  const url = 'http://localhost:9900/cc/public/test/t-01'
+  const url = 'http://localhost:9999/xxx/public/test/t-map'
   // 准备要发送的 JSON 数据
   const data = {
     key1: 'value1',
     key2: 'value2',
-    id: row.num_iid
-  };
+    id: row.pid
+  }
 
   // 发送 POST 请求
   const response = await axios.post(url, data)
@@ -36,16 +67,27 @@ const __handle_up_shelf = async (index, row) => {
 const __handle_post = async (index, row) => {
   console.log(2, index, row)
   // ------------------
-  const url = 'http://localhost:9900/cc/public/test/t-01'
+  const url = 'http://localhost:9999/xxx/public/test/t-map'
   const data = {
-    id: row.num_iid
-  };
+    id: row.pid
+  }
 
   const response = await axios.post(url, data)
   console.log(3, '---', response.data)
+  const responseBody = response.data
+
+  ElNotification({
+    title: '结果',
+    message: responseBody.msg,
+    type: 'success',
+  })
 }
 
-onMounted(__$_request_data)
+
+
+// 生命周期
+onMounted(() => __$_request_data())
+
 </script>
 
 <template>
@@ -63,21 +105,22 @@ onMounted(__$_request_data)
 
     <!--=================-->
     <el-table-column label="商品" width="180" align="left">
-        <template #default="scope">
-            <!--=================-->
-            <router-link :to="'/xx/detail/' + scope.row.pid" class="link-type">
-                <span>{{ scope.row.title }}</span>
-            </router-link>
-            <el-tag v-if="scope.row.xFlag" type="danger" size="small" style="margin-left: 8px;">促</el-tag>
-            <!--=================-->
-        </template>
+      <template #default="scope">
+        <!--=================-->
+        <router-link :to="'/xx/detail/' + scope.row.pid" class="link-type">
+          <span>{{ scope.row.title }}</span>
+        </router-link>
+        <el-tag v-if="scope.row.xFlag" type="danger" size="small" style="margin-left: 8px;">促</el-tag>
+        <!--=================-->
+      </template>
     </el-table-column>
     <!--=================-->
 
 
-
     <el-table-column label="操作">
       <template #default="scope">
+        <el-link type="primary" @click="handleUpdate(scope.row)" style="margin-right: 8px;">修改 </el-link>
+        <!---业务操作--->
         <el-button size="small" type="primary" @click="__handle_up_shelf(scope.$index, scope.row)">
           上架
         </el-button>
@@ -89,8 +132,24 @@ onMounted(__$_request_data)
         </el-button>
       </template>
     </el-table-column>
+    <!--=================-->
+
   </el-table>
+
+
+  <!--page footer-->
+  <el-pagination class="page" v-model:current-page="currentPage" v-model:page-size="pageSize"
+    :page-sizes="[20, 50, 100]" background layout="total, sizes, prev, pager, next, jumper" :total="__total"
+    @size-change="handleSizeChange" @current-change="handleCurrentChange" />
 </template>
+
+<style scoped>
+.page {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: right;
+}
+</style>
 ```
 
 ---------------------
