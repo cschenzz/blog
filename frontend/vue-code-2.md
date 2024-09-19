@@ -92,32 +92,35 @@ onMounted(() => __$_request_data())
 
 <template>
   <el-table :data="__list" stripe style="width: 100%">
-    <el-table-column prop="title" label="名称" width="500" />
-    <el-table-column prop="price" label="价格" width="200" />
-    <el-table-column prop="pid" label="商品id" />
+
+    <!--====带链接列=====-->
+    <el-table-column label="商品" width="900" align="left">
+      <template #default="scope">
+        <!--=================-->
+        <router-link :to="'/xx/detail/' + scope.row.pid" class="link-type">
+          <span>{{ scope.row.title }}</span>
+        </router-link>
+        <el-tag v-if="scope.row.xFlag" type="danger" size="small" style="margin-left: 8px;">新</el-tag>
+        <!--=================-->
+      </template>
+    </el-table-column>
+    <!--=================-->
+
     <!--====显示图片====-->
-    <el-table-column label="商品图">
+    <el-table-column label="封面图">
       <template width="90" #default="scope">
         <el-image style="width:80px;height:80px;border:none;"
           :src="scope.row.img + '?x-oss-process=image/resize,h_90,m_lfit'" fit="contain" />
       </template>
     </el-table-column>
 
-    <!--=================-->
-    <el-table-column label="商品" width="180" align="left">
-      <template #default="scope">
-        <!--=================-->
-        <router-link :to="'/xx/detail/' + scope.row.pid" class="link-type">
-          <span>{{ scope.row.title }}</span>
-        </router-link>
-        <el-tag v-if="scope.row.xFlag" type="danger" size="small" style="margin-left: 8px;">促</el-tag>
-        <!--=================-->
-      </template>
-    </el-table-column>
-    <!--=================-->
+
+    <!---other col--->
+    <el-table-column prop="price" label="价格" width="200" />
+    <el-table-column prop="pid" label="商品id" align="center" />
 
 
-    <el-table-column label="操作">
+    <el-table-column label="操作" align="center">
       <template #default="scope">
         <el-link type="primary" @click="handleUpdate(scope.row)" style="margin-right: 8px;">修改 </el-link>
         <!---业务操作--->
