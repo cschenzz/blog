@@ -51,10 +51,10 @@ System.out.println(HexUtil.toHex(code2));
 ```java
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.PathUtil;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 
 // 只修改文件名, 不移动目录
-PathUtil.rename(Paths.get("/home/czz/test-1.png"), "new-file-001.png", false);
+PathUtil.rename(Path.of("/home/czz/test-1.png"), "new-file-001.png", false);
 
 // 修改文件或目录的文件名，不变更路径，只是简单修改文件名
 // e.g: FileUtil.rename(file, "aaa.jpg", false) xx/xx.png => xx/aaa.jpg
@@ -66,10 +66,16 @@ PathUtil.rename(Paths.get("/home/czz/test-1.png"), "new-file-001.png", false);
 // since 5.4.1
 ```
 
-## 移动文件
+## 复制/移动文件
 ```java
-// 移动文件到目录, 文件名不变
-java.nio.file.Path mPath = PathUtil.move(Paths.get("/home/czz/test-1.png"), Paths.get("/home/czz/bak/"), false);
+// 根据url获取文件对象
+java.io.File tmpFile = FileUtil.file("/home/czz/t-1.png");
+
+// 复制文件到目录, 文件名不变
+File targetFile = FileUtil.copy("/home/czz/test-1.png", "/home/czz/bak/", false);
+
+// 移动文件到目录, 文件名不变, 也可以使用FileUtil.move(Path, Path, boolean)
+java.nio.file.Path mPath = PathUtil.move(Path.of("/home/czz/test-1.png"), Path.of("/home/czz/bak/"), false);
 
 // 移动文件或目录 当目标是目录时，会将源文件或文件夹整体移动至目标目录下 例如：
 // move("/usr/aaa/abc.txt", "/usr/bbb")结果为："/usr/bbb/abc.txt"
