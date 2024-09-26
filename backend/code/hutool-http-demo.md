@@ -66,7 +66,9 @@ Dict dt = Dict.create()
 String json = JSONUtil.toJsonStr(dt);
 // ================================
 String result = HttpRequest.post(url)
+        // 设置head(可设置多个, 存在则覆盖原值)
         .header("Authorization", token)
+        .header("User-Agent", "Hutool.Http")
         .body(json)
         .execute().body();
 Console.log(result);
