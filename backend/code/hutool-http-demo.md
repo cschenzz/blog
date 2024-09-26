@@ -82,6 +82,8 @@ Dict dt = Dict.create()
         .set("age", 23);
 
 String result = HttpRequest.post(url)
+        // 用于上传文件或包含二进制数据的表单
+        .header("content-type", "multipart/form-data")
         .header("Authorization", "token-xxx")
         .form(dt)
         .execute().body();
