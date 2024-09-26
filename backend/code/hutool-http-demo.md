@@ -83,7 +83,7 @@ Dict dt = Dict.create()
 
 String result = HttpRequest.post(url)
         // 用于上传文件或包含二进制数据的表单
-        .header("content-type", "multipart/form-data")
+        // .header("content-type", "multipart/form-data")
         .header("Authorization", "token-xxx")
         .form(dt)
         // 科学上网需要设置代理(参考Clash For Windows工具配置)
@@ -131,6 +131,7 @@ Console.log(result);
 // form上传文件支持多个
 String url = "http://127.0.0.1:8888/file";
 String result = HttpRequest.post(url)
+        .header("content-type", "multipart/form-data")
         .form("file", FileUtil.file("/home/chenzz/file/ff-01.zip"))
         .execute().body();
 Console.log(result);
