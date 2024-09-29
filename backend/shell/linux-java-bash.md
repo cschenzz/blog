@@ -34,7 +34,7 @@ sed -n '600,900p' /root/xx-api/logs/run.log > ./temp-xxx-01.txt
 
 #  ps -aux | grep 'java -jar'
 #  ps -ef | grep 'java -jar'
-#  也可以使用jps查看java进程
+#  也可以使用'jps -l'查看java进程
 #  匹配通过java -jar命令运行的java进程,找到pid.用kill -9 [pid]结束进程
 
 # 查看path环境变量
