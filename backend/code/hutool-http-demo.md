@@ -128,13 +128,40 @@ Console.log(result);
 
 ## post-上传文件
 ```java
-// form上传文件支持多个
+// 1.form上传文件支持多个
 String url = "http://127.0.0.1:8888/file";
 String result = HttpRequest.post(url)
         .header("content-type", "multipart/form-data")
         .form("file", FileUtil.file("/home/chenzz/file/ff-01.zip"))
         .execute().body();
 Console.log(result);
+
+
+// 2.stability图片增强(变高清)
+String url = "https://api.stability.ai/v2beta/stable-image/upscale/conservative";
+
+Dict dt = Dict.create()
+        // 其他参数
+        .set("prompt", "a flower")
+        .set("output_format", "webp")
+        // 上传图片文件
+        .set("image", FileUtil.file("/home/chenzz/img/xx-01.jpg"));
+// ------------------------------
+InputStream inputStream = HttpRequest.post(url)
+        // 上传文件/图片使用multipart/form-data
+        .header("content-type", "multipart/form-data")
+        .header("Authorization", "Bearer stable-key-xxxx")
+        .header("Accept", "image/*")
+        // 底层实现同上面一样(可以参考hutool源码实现)
+        .form(dt)
+        // 开启代理
+        .setHttpProxy("127.0.0.1", 7890)
+        .execute().bodyStream();
+
+// -------------------------
+String filePath = String.format("/home/chenzz/img/tmp-%s.webp", System.currentTimeMillis());
+// 保存参考下面文件保存代码
+// saveStreamToFile(inputStream, filePath);
 ```
 
 ## 下载文件并保存
