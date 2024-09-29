@@ -123,9 +123,14 @@ public class HttpMainTests {
                 .setRoot("/home/chenzz/web-html")
                 // 文件上传
                 .addAction("/upload-file", (request, response) -> {
+                            // 接收通过form方式传过来的其他参数, 可以传多个参数
+                            final String prompt = request.getParam("prompt");
+                            // -------------------
                             final UploadFile file = request.getMultipart().getFile("file");
                             // 文件保存目录，默认读取HTTP头中的文件名进行保存
                             file.write("/home/chenzz/tempp/ttt/");
+                            // 也可以使用自定义文件名保存
+                            // file.write("/tmp/ttt/new_file.zip");
                             response.write("文件上传成功:" + file.getFileName(), ContentType.TEXT_PLAIN.toString());
                         }
                 )
