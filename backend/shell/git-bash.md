@@ -147,6 +147,9 @@ git branch -a
 git checkout jdk-17-temp-dev
 # 分支 'jdk-17-temp-dev' 设置为跟踪 'origin/jdk-17-temp-dev'。
 # 切换到一个新分支 'jdk-17-temp-dev'
+
+# 从当前分支创建新分支并切换到新分支
+git checkout -b new-branch-name
 ```
 
 ## 清理重命名
