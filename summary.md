@@ -34,6 +34,7 @@
   * [常用命令-node.js & vue](frontend/f-1.md)
   * [Vue3常用代码](frontend/vue-code-1.md)
   * [Vue3示例代码-1](frontend/vue-code-2.md)
+  * [javascript知识-1](frontend/js-code-1.md)
 * ☕工具
   * [arthas处理实例](tools/t-1.md)
   * [docker使用实例命令](tools/docker-usage.md)

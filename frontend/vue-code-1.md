@@ -137,6 +137,18 @@ console.log(usersWithDynamicAdminField)
 ```
 
 
+## 数组遍历
+```js
+const array = [1, 2, 3, 4, 5]
+
+array.forEach((element, index, arr) => {
+  console.log(element); // 输出: 1, 2, 3, 4, 5
+  console.log(index);   // 输出: 0, 1, 2, 3, 4
+  console.log(arr);     // 输出: [1, 2, 3, 4, 5] (每次都是整个数组)
+})
+```
+
+
 ## 异步请求方法
 ```js
 import axios from 'axios'
