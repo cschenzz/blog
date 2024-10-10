@@ -120,6 +120,22 @@ const person = {
 person.sayHello();
 ```
 
+## js中对数组使用map操作添加字段
+```js
+const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 35 }
+]
+
+const usersWithDynamicAdminField = users.map(user => ({
+	...user, // 使用扩展运算符复制原有的属性
+	isAdmin: user.age >= 30 // 如果年龄大于等于30岁，则为管理员
+}))
+
+console.log(usersWithDynamicAdminField)
+```
+
 
 ## 异步请求方法
 ```js
