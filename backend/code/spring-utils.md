@@ -111,6 +111,56 @@ for (var name : ctx.getBeanDefinitionNames()) {
 }
 ```
 
+
+## 使用MultipartFile上传文件到本地
+```java
+package com.example.demo;
+
+import cn.hutool.core.lang.Console;
+import cn.hutool.core.lang.Dict;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+
+@RestController
+@SpringBootApplication
+public class SpringDemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringDemoApplication.class, args);
+    }
+
+    /**
+     * 使用multipart/form-data表单上传文件并保存到本地
+     * 同时还可以接收多个参数
+     */
+    @PostMapping("/upload")
+    public Dict upload(String ask, String output, @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+        Console.log("ask = {}, output = {}", ask, output);
+        boolean fileExist = file != null && !file.isEmpty();
+        Console.log("是否存在文件: {}, size:{}", fileExist ? "存在" : "不存在", fileExist ? file.getSize() : 0);
+
+        if (fileExist) {
+            String saveFilePath = "/home/chenzz/upload-file/" + file.getOriginalFilename();
+            // 保存MultipartFile文件到本地的2种方法
+            // file.transferTo(java.nio.file.Paths.get(saveFilePath));
+            java.nio.file.Files.copy(file.getInputStream(), java.nio.file.Paths.get(saveFilePath));
+
+            return Dict.create().set("code", 200).set("msg", "file saved.");
+        }
+        return Dict.create().set("code", 500).set("msg", "no file.");
+    }
+
+}
+```
+
+
+
 ## spring boot获取配置
 ```java
 // 方法1

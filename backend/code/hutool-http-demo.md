@@ -152,7 +152,7 @@ InputStream inputStream = HttpRequest.post(url)
         .header("content-type", "multipart/form-data")
         .header("Authorization", "Bearer stable-key-xxxx")
         .header("Accept", "image/*")
-        // 底层实现同上面一样(可以参考hutool源码实现)
+        // 底层实现同上面方式1是一样(可以参考hutool源码实现)
         .form(dt)
         // 开启代理
         .setHttpProxy("127.0.0.1", 7890)
