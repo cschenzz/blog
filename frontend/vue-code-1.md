@@ -189,7 +189,7 @@ export const __testUploadFile = async (__ask, __file) => {
         body: formdata,
     }
 
-    const response = await fetch("http://127.0.0.1:8080/upload", requestOptions)
+    const response = await fetch("http://127.0.0.1:9999/upload", requestOptions)
 
     if (response.ok) {
         const result = await response.json()
@@ -198,6 +198,22 @@ export const __testUploadFile = async (__ask, __file) => {
     } else {
         console.error('上传失败:', response.statusText)
     }
+}
+
+
+// fetch.get请求测试(函数异步化)
+export async function testFetchGet() {
+    let myHeaders = new Headers()
+    myHeaders.append('User-Agent', 'Apifox/1.0.0 (https://apifox.com)')
+
+    const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    }
+
+    const response = await fetch('http://127.0.0.1:9999/xx/public/get-cat-list', requestOptions)
+    return response.json()
 }
 ```
 
