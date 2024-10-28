@@ -153,6 +153,7 @@ array.forEach((element, index, arr) => {
 ```js
 import axios from 'axios'
 
+// ----------1----------
 const __$_request_data = async () => {
   const response = await axios.get('http://localhost:9900/cc/public/help')
   // 使用 JSON.stringify() 方法可以将 JavaScript 对象转换为 JSON 字符串
@@ -169,6 +170,35 @@ onMounted(async () => {
   const response = await axios.get('http://localhost:9900/cc/public/help')
   console.log(3, '---', response.data)
 })
+
+// ----------2----------
+// 使用fetch以异步方式上传文件
+export const __testUploadFile = async (__ask, __file) => {
+    let myHeaders = new Headers()
+    myHeaders.append("User-Agent", "Apifox/1.0.0 (https://apifox.com)")
+    myHeaders.append("token", "Bearer xxx")
+
+    let formdata = new FormData()
+    formdata.append("file", __file, __file.name)
+    formdata.append("ask", __ask)
+    formdata.append("output", "png")
+
+    const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+    }
+
+    const response = await fetch("http://127.0.0.1:8080/upload", requestOptions)
+
+    if (response.ok) {
+        const result = await response.json()
+        console.log('上传成功:', result)
+        return result
+    } else {
+        console.error('上传失败:', response.statusText)
+    }
+}
 ```
 
 ---------------------
