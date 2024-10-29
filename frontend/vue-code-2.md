@@ -155,5 +155,32 @@ onMounted(() => __$_request_data())
 </style>
 ```
 
+
+## uni-app中grid显示图片
+```js
+<uni-section title="历史记录" type="line" padding>
+    <uni-grid :column="2" :highlight="true">
+        <uni-grid-item v-for="(item, index) in __myMsgList" :index="index" :key="index">
+            <image style="width: 200px; height: 200px; background-color: #eeeeee;" mode="aspectFill"
+                :src="item.file_url" @click="previewImg($event, item.file_url, index)"></image>
+        </uni-grid-item>
+    </uni-grid>
+</uni-section>
+
+// 图片预览
+const previewImg = (__e, __url, __index) => {
+    console.log('previewImg', __e, __url, __index)
+    // const { img } = __e.currentTarget.dataset
+    // console.log('img', img)
+    // -----------------------
+    const __tmpImgUrls = __myMsgList.value.map(item => item.file_url)
+    // console.log('xx', __tmpImgUrls)
+    uni.previewImage({
+        current: __index,
+        urls: __tmpImgUrls
+    })
+}
+```
+
 ---------------------
 - [Vue3中文站](https://cn.vuejs.org/)
