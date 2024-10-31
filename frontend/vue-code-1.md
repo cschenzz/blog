@@ -37,6 +37,24 @@ const props = defineProps({
     user: Object
 })
 
+const props = defineProps({
+    title: {
+        type: String,
+        required: false,
+        default: '-'
+    },
+    dataList: {
+        type: Array,
+        required: true
+    },
+    maxSize: {
+        type: Number,
+        required: false,
+        default: 9
+    },
+})
+
+
 const __$_name = computed(() => {
     return 'computed:' + props.user.name
 })
@@ -179,6 +197,7 @@ export const __testUploadFile = async (__ask, __file) => {
     myHeaders.append("token", "Bearer xxx")
 
     let formdata = new FormData()
+    // 文件字段, 注意需要和后端接口字段对应
     formdata.append("file", __file, __file.name)
     formdata.append("ask", __ask)
     formdata.append("output", "png")
