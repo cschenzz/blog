@@ -103,7 +103,7 @@
 
 [🍨MyFreeMp3在线音乐](https://tools.liumingye.cn/music)
 
-[📚HTML颜色代码](https://htmlcolorcodes.com/zh/)
+[📚HTML颜色代码](https://htmlcolorcodes.com/zh/) | [网页安全色](https://htmlcolorcodes.com/zh/yanse-biao/wangluo-anquan-yanse-biao/)
 
 [📙WEB前端导航](http://www.alloyteam.com/nav/)
 
