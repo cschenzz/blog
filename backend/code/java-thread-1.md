@@ -190,5 +190,138 @@ void test11() throws ExecutionException, InterruptedException {
 }
 ```
 
+
+## CompletableFuture单元测试
+```java
+package com.example.spring.test;
+
+import cn.hutool.core.lang.Console;
+import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.RandomUtil;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.CompletableFuture;
+
+/**
+ * CompletableFuture测试
+ */
+public class CompletableFutureTests {
+
+    @DisplayName("CompletableFuture测试")
+    @Test
+    void testX01() {
+        CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(() -> {
+            System.out.println("当前线程" + Thread.currentThread().getId());
+            int i = 10 / 2;
+            System.out.println("运行结果：" + i);
+        });
+
+        // supplyAsync有返回值
+        // handle能拿到返回结果，也能得到异常信息，也能修改返回值
+        // CompletableFuture<String> future =
+        CompletableFuture.supplyAsync(() -> {
+            System.out.println("当前线程" + Thread.currentThread().getId());
+            int i = 10 / 4;
+            System.out.println("运行结果：" + i);
+            return i;
+        }).handle((res, exception) -> {
+            if (exception != null) {
+                return "--";
+            } else {
+                return "xx-" + res * 2;
+            }
+        });
+    }
+
+    @DisplayName("多个CompletableFuture可以串行执行")
+    @Test
+    void testX02() {
+        // 异步串行执行, 1-2-3依次执行, 1的结果为2的输入, 2的结果为3的输入
+        CompletableFuture.supplyAsync(() -> {
+            Console.log("step.1");
+            ThreadUtil.sleep(100);
+            return "中国石油";
+        }).thenApplyAsync((company) -> {
+            Console.log("step.2, {}", company);
+            ThreadUtil.sleep(100);
+            return 5 + Math.random() * 20;
+        }).thenAccept((result) -> {
+            System.out.println("3.price: " + result);
+        });
+
+        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭
+        ThreadUtil.sleep(2000);
+    }
+
+    @DisplayName("多个CompletableFuture还可以并行执行")
+    @Test
+    void testX03() {
+        // 模拟分别使用2个线程分别从新浪, 网易获取中国石油的股票代码, 然后那个先执行完就使用那个返回的股票代码去查询当前股票价格, 最后打印股票价格
+        CompletableFuture.anyOf(CompletableFuture.supplyAsync(() -> {
+            Console.log("通过sina新浪查询中国石油代码");
+            long sleepMs = RandomUtil.randomLong(200, 400);
+            ThreadUtil.sleep(sleepMs);
+            Console.log("-----查询成功(耗时{}ms), from sina------", sleepMs);
+            return "601857-sina";
+        }), CompletableFuture.supplyAsync(() -> {
+            Console.log("通过163网易查询中国石油代码");
+            long sleepMs = RandomUtil.randomLong(200, 400);
+            ThreadUtil.sleep(sleepMs);
+            Console.log("-----查询成功(耗时{}ms), from 163------", sleepMs);
+            return "601857-163";
+        })).thenApplyAsync((code) -> {
+            Console.log("查询[{}]股票价格", code);
+            ThreadUtil.sleep(RandomUtil.randomLong(400, 500));
+            return RandomUtil.randomDouble(5, 200);
+        }).thenAccept((result) -> {
+            System.out.println("股票价格price: " + result);
+        });
+
+        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭
+        ThreadUtil.sleep(2000);
+    }
+
+    @DisplayName("多个CompletableFuture还可以并行执行-2")
+    @Test
+    void testX04() {
+        // 模拟分别使用2个线程分别从新浪, 网易获取中国石油的股票代码, 然后那个先执行完就使用那个返回的股票代码分别通过新浪和网易去查询当前股票价格, 那个先执行完先打印对应的打印股票价格
+        CompletableFuture<Object> cfQuery = CompletableFuture.anyOf(CompletableFuture.supplyAsync(() -> {
+            Console.log("通过sina新浪查询中国石油代码");
+            long sleepMs = RandomUtil.randomLong(200, 400);
+            ThreadUtil.sleep(sleepMs);
+            Console.log("-----1.查询成功(耗时{}ms), from sina------", sleepMs);
+            return "601857-sina";
+        }), CompletableFuture.supplyAsync(() -> {
+            Console.log("通过163网易查询中国石油代码");
+            long sleepMs = RandomUtil.randomLong(200, 400);
+            ThreadUtil.sleep(sleepMs);
+            Console.log("-----1.查询成功(耗时{}ms), from 163------", sleepMs);
+            return "601857-163";
+        }));
+
+        CompletableFuture.anyOf(cfQuery.thenApplyAsync((code) -> {
+            Console.log("通过sina查询股票价格");
+            long sleepMs = RandomUtil.randomLong(100, 300);
+            ThreadUtil.sleep(sleepMs);
+            Console.log("-----2.查询成功(耗时{}ms), from sina------", sleepMs);
+            return "99元-sina";
+        }), cfQuery.thenApplyAsync((code) -> {
+            Console.log("通过163查询股票价格");
+            long sleepMs = RandomUtil.randomLong(100, 300);
+            ThreadUtil.sleep(sleepMs);
+            Console.log("-----2.查询成功(耗时{}ms), from 163------", sleepMs);
+            return "99元-163.com";
+        })).thenAccept((result) -> {
+            System.out.println("股票价格price: " + result);
+        });
+
+        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭
+        ThreadUtil.sleep(2000);
+    }
+
+}
+```
+
 ---------------------
 - [JAVA基于CompletableFuture的流水线并行处理深度实践](https://juejin.cn/post/7124124854747398175)
