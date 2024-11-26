@@ -38,6 +38,16 @@ const props = defineProps({
 })
 
 const props = defineProps({
+    // 对象类型的默认值
+    user: {
+      type: Object,
+      // 对象或数组的默认值
+      // 必须从一个工厂函数返回。
+      // 该函数接收组件所接收到的原始 prop 作为参数。
+      default(rawProps) {
+        return { name: 'tim' }
+      }
+    },
     title: {
         type: String,
         required: false,
@@ -131,11 +141,16 @@ sayHello("Alice");
 // 函数可以作为对象的一个属性（即方法）被调用。
 const person = {
   name: "Bob",
-  sayHello: function() {
-    console.log("Hello, " + this.name);
+  sayHello: function () {
+    console.log("Hello, " + this.name)
+  },
+  // 箭头函数
+  search: async (keyWords) => {
+    const response = await ___askQuestion(keyWords)
+    console.log('res', response)
   }
-};
-person.sayHello();
+}
+person.sayHello()
 ```
 
 ## js中对数组使用map操作添加字段
