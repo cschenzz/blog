@@ -63,6 +63,7 @@
 - [Element-Plus官网](https://element-plus.org/zh-CN/component/button.html) | [Gitee镜像](https://element-plus.gitee.io/zh-CN/)
 - [Vant UI文档(github)](https://vant-ui.github.io/vant/#/zh-CN) | [gitee.io文档](https://vant-contrib.gitee.io/vant) | [github](https://github.com/youzan/vant)
 - [Tailwind CSS官网文档](https://tailwindcss.com/docs/installation) | [中文网](https://www.tailwindcss.cn)
+- [菜鸟CSS教程](https://www.runoob.com/css/css-tutorial.html) | [CSS3-Flex弹性盒子](https://www.runoob.com/css3/css3-flexbox.html)
 - [uni-app](https://uniapp.dcloud.net.cn/)
 - [ECharts使用手册](https://echarts.apache.org/handbook/zh/get-started/)
 - [阿里巴巴图标站](https://www.iconfont.cn/)
