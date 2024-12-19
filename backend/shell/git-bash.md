@@ -152,6 +152,9 @@ git checkout jdk-17-temp-dev
 # -------
 # 从当前分支创建新分支并切换到新分支
 git checkout -b new-branch-name
+
+# 用指定的提交创建分支并切换到新分支
+git checkout -b dev-tmp-01 0a61f94
 ```
 
 ## 清理重命名
