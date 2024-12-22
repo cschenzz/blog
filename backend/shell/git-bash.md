@@ -24,10 +24,10 @@ git push mygit master
 git push origin --all
 
 # 取消已经commit但是未push的操作
-# 回退到上个版本
-git reset --hard HEAD^
+# 回退到上个版本, --soft保留更改内容
+git reset --soft HEAD^
 
-# 回退到前3次提交之前，以此类推，回退到n次提交之前
+# 回退到前3次提交之前，以此类推，回退到n次提交之前, --hard撤销相关更改
 git reset --hard HEAD~3
 
 # 回退到指定commit的版本
