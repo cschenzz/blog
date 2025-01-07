@@ -190,7 +190,7 @@ import axios from 'axios'
 const __$_request_data = async () => {
   const response = await axios.get('http://localhost:9900/cc/public/help')
   // 使用 JSON.stringify() 方法可以将 JavaScript 对象转换为 JSON 字符串
-  // 将 JSON 字符串转换为 JavaScript 对象
+  // 将 JSON.parse(jsonStr) 字符串转换为 JavaScript 对象
   console.log(1, '---', JSON.stringify(response, null, 2))
   console.log(2, '---', JSON.stringify(response.data))
   console.log(3, '---', response.data)
