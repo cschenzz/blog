@@ -60,7 +60,7 @@
 
 ## 📝前端文档
 - [Vue3官方指南](https://cn.vuejs.org/guide/introduction.html)
-- [Element-Plus官网](https://element-plus.org/zh-CN/component/button.html) | [Gitee镜像](https://element-plus.gitee.io/zh-CN/)
+- [Element-Plus官网](https://element-plus.org/zh-CN/component/button.html) | [中国大陆镜像加速站](https://cn.element-plus.org/zh-CN/component/overview.html) | [Gitee镜像](https://element-plus.gitee.io/zh-CN/)
 - [Vant UI文档(github)](https://vant-ui.github.io/vant/#/zh-CN) | [gitee.io文档](https://vant-contrib.gitee.io/vant) | [github](https://github.com/youzan/vant)
 - [Tailwind CSS官网文档](https://tailwindcss.com/docs/installation) | [中文网](https://www.tailwindcss.cn)
 - [菜鸟CSS教程](https://www.runoob.com/css/css-tutorial.html) | [CSS3-Flex弹性盒子](https://www.runoob.com/css3/css3-flexbox.html)
