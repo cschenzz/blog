@@ -112,7 +112,11 @@ Dict dict = Dict.create().set("user", Dict.create().set("name", "tom").set("age"
 // {"user":{"name":"tom","age":99},"roles":["admin","sales"]}
 Optional<Dict> optionalDict = Optional.ofNullable(dict);
 // 结果: tom, 使用Optional的map一级一级获取深层数据值
-String name = optionalDict.map(oo -> oo.get("user", Dict.create())).map(oo -> oo.getStr("name")).orElse("-");
+String name = optionalDict
+        // 前面一步的map结果会作为下一步map的输入参数, 并且在任何一个map中如果返回值为null, 则结果使用else中定义的值
+        .map(oo -> oo.get("userx", Dict.create()))
+        .map(oo -> oo.getStr("name"))
+        .orElse("-");
 
 // 2. ifPresent用法
 optionalDict.ifPresent(mm -> {

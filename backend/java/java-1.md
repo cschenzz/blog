@@ -109,6 +109,79 @@ log.info("格式化时间: {}", dayAfter10.format(DateTimeFormatter.ofPattern("y
 
 ```
 
+
+## Optional使用
+```java
+package com.example.test;
+
+import lombok.Data;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.Date;
+import java.util.Optional;
+
+public class TempX01Tests {
+
+    @DisplayName("Optional测试获取深层次对象的值")
+    @Test
+    void testX01() {
+        User user1 = new User();
+        user1.setId(100);
+        user1.setUsername("czz");
+
+        LoginUser loginUser1 = new LoginUser();
+        loginUser1.setToken("token-1");
+        loginUser1.setObjUser(user1);
+        // loginUser1.setUser(user1);
+        // loginUser1.setObjUser(888);
+
+        var xValue = Optional.of(loginUser1)
+                .map(LoginUser::getObjUser)
+                .map(oo -> {
+                    if (oo instanceof String) {
+                        return oo.toString();
+                    } else if (oo instanceof User user) {
+                        return user.getId();
+                    }
+                    System.out.println("----1.");
+                    return null;
+                })
+                .orElse("-");
+
+        System.out.println(xValue.getClass());
+        System.out.println(xValue);
+    }
+
+
+    /**
+     * 登陆用户
+     */
+    @Data
+    static class LoginUser {
+        private String token;
+        private Date loginTime;
+        private User user;
+        private Object objUser;
+    }
+
+    /**
+     * 用户信息
+     */
+    @Data
+    static class User {
+        private int id;
+        private String username;
+        private String password;
+        private int age;
+    }
+
+
+}
+```
+
+
+
 ## List元素删除测试
 
 ```java
