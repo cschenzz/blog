@@ -219,4 +219,18 @@ git config --list
 
 # 设置命令别名lg, 这样输入git lg就能看到漂亮的git log
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+
+# ------------------
+# 代理设置(仅需设置http.proxy就可以)
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+
+
+# 查看代理
+git config --global --get https.proxy
+
+# 取消代理设置
+git config --global --unset http.proxy
+git config --global --unset https.proxy
 ```
