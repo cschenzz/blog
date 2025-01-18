@@ -226,6 +226,10 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 git config --global http.proxy http://127.0.0.1:7890
 git config --global https.proxy http://127.0.0.1:7890
 
+# 如果你只想为某个特定的Git仓库设置代理，而不是全局配置，可以使用以下命令，在项目的根目录下执行
+# 设置 HTTP 代理
+git config http.proxy http://127.0.0.1:7890
+
 
 # 查看代理
 git config --global --get https.proxy
