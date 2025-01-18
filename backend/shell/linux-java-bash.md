@@ -10,6 +10,9 @@
 # 指定端口
 # nohup java -jar sb-admin.jar --server.port=9995 > __log.txt 2>&1 &
 
+# 显示文件前50行
+head -n 50 ./___xx_log.txt
+
 # tail -fn 50 __log.txt
 # 滚动显示日志(最新50行,f滚动,n行数),CTRL+C退出
 

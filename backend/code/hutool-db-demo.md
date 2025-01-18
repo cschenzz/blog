@@ -111,6 +111,8 @@ cn.hutool.db.GlobalDbConfig.setShowSql(true, true, true, Level.DEBUG);
 DateTime beginTime = DateUtil.beginOfDay(DateTime.of("2023-05-09", "yyyy-MM-dd"));
 DateTime endTime = DateUtil.endOfMonth(beginTime);
 
+// Entity中数据字段默认会转换成小写
+// (比如数据库中字段userId->userid, 读取数据的时候使用2种方式都可以, 因为读取的时候也会根据配置转换成小写)
 // List<Entity> entityList = db.query("select * from sys_user where login_date>? order by user_id desc limit 10", DateTime.now().offsetNew(DateField.DAY_OF_MONTH, -7));
 List<Entity> entityList = db.query("select s.* from sys_user s where s.user_id>? and s.login_date between ? and ? order by s.user_id desc", 0, beginTime, endTime);
 List<Entity> ddList = entityList.stream().peek(t -> {
