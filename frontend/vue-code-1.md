@@ -71,6 +71,13 @@ const __$_name = computed(() => {
 
 // onMounted(() => __init())
 
+// ----------
+onMounted(() => {
+    console.log('---onMounted--', props.user, props.title)
+    __init()
+})
+
+
 onUnmounted(() => {
     console.log(1, '--onUnmounted')
 })
@@ -86,6 +93,46 @@ const __generateRandomString = (length) => {
     }
     return result
 }
+```
+
+
+## watch监听值变化
+```js
+// 1.监听单个值
+watch(
+    () => route.params.keyword,
+    (newValue, oldValue) => {
+        console.log('监听值变化', newVal, oldVal)
+        state.a = newValue
+    }
+)
+
+// 2.监听多个值
+watch(
+    () => [route.params.id, route.params.keyword],
+    (newValue, oldValue) => {
+        console.log('监听值变化', newVal, oldVal)
+        state.a = newValue[0]
+        state.b = newValue[1]
+    }
+)
+
+// 3.父组件传过来的props,直接监听props
+watch(props, () => {
+    if (props.title) {
+        getList()
+    }
+})
+
+
+// 监听 props 中基本数据类型, 同1
+watch(
+    () => props.orderSn,
+    async (newOrderSn, oldOrderSn) => {
+        console.log('订单号有改变', oldOrderSn + '==>' + newOrderSn)
+        loadOrderDetail(newOrderSn)
+    }
+)
 ```
 
 
