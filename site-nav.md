@@ -32,6 +32,7 @@
 - [知乎](https://www.zhihu.com)
 - [开源中国](https://www.oschina.net)
 - [博客园](https://www.cnblogs.com)
+- [腾讯开发者社区](https://cloud.tencent.com/developer)
 - [Spring initializr](https://start.spring.io/)
 
 文档教程
