@@ -263,6 +263,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
@@ -344,7 +345,7 @@ public class SysUser extends BaseEntity implements Serializable {
     private String avatar;
 
     /**
-     * 密码
+     * 密码(不返回到前端)
      */
     @JsonIgnore
     private String password;
@@ -361,6 +362,12 @@ public class SysUser extends BaseEntity implements Serializable {
     @Min(0)
     @Max(1)
     private Integer status;
+
+    /**
+     * 配置数据(json)
+     */
+    @Column(name = "config_json", columnDefinition = "json DEFAULT NULL COMMENT '配置json'")
+    private String configJson;
 
     /**
      * 最后登陆IP
