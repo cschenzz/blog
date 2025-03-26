@@ -306,6 +306,7 @@ public class SysUser extends BaseEntity implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "修改时userId不能为空", groups = {UpdateGroup.class})
     @Min(value = 1, groups = {UpdateGroup.class})
+    @Column(name = "user_id", columnDefinition = "bigint NOT NULL AUTO_INCREMENT COMMENT 'id主键'")
     private Long userId;
 
     /**
@@ -345,7 +346,7 @@ public class SysUser extends BaseEntity implements Serializable {
     private String avatar;
 
     /**
-     * 密码(不返回到前端)
+     * 密码(JsonIgnore注解字段不返回到前端)
      */
     @JsonIgnore
     private String password;
