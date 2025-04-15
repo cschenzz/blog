@@ -344,7 +344,7 @@ public class MyBatisPlus3xTests {
         // 2. 格式化后json(null值不显示):
         // {
         //     "msg": "ok",
-        //     "code": 200
+        //     "code": 0
         // }
         Dict dict = Dict.create().set("code", 200).set("msg", "ok").set("data", null);
         String jsonText = JSONUtil.parse(dict).toString();

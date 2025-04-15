@@ -16,7 +16,7 @@ public class R extends HashMap<String, Object> {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private static final int SUCCESS = 200;
+    private static final int SUCCESS = 0;
 
     private static final int FAIL = 500;
 
@@ -87,7 +87,7 @@ public class Results<T> implements Serializable {
     /**
      * 成功
      */
-    private static final int SUCCESS = 200;
+    private static final int SUCCESS = 0;
 
     /**
      * 失败
