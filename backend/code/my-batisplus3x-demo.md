@@ -346,7 +346,7 @@ public class MyBatisPlus3xTests {
         //     "msg": "ok",
         //     "code": 0
         // }
-        Dict dict = Dict.create().set("code", 200).set("msg", "ok").set("data", null);
+        Dict dict = Dict.create().set("code", 0).set("msg", "ok").set("data", null);
         String jsonText = JSONUtil.parse(dict).toString();
         System.out.println("2. 未格式化json:\r\n" + jsonText);
 
