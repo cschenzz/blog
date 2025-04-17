@@ -65,28 +65,27 @@ public class CcTestController extends BaseController {
                 // List<Entity> userRowList = db.query("select * from sys_user order by user_id desc limit 100");
 
                 List<Dict> dataList = result.stream().map(tt -> {
-                                    Dict xxDict = Dict.create()
-                                            .set("id", tt.getLong("info_id"))
-                                            .set("登录用户(手机号)", tt.getStr("user_name"));
+                            Dict xxDict = Dict.create()
+                                    .set("id", tt.getLong("info_id"))
+                                    .set("登录用户(手机号)", tt.getStr("user_name"));
 
-                                    Optional<Entity> optionalEntity = userEntityList.stream().filter(yy -> yy.getStr("user_name").equals(tt.getStr("user_name"))).findAny();
+                            Optional<Entity> optionalEntity = userEntityList.stream().filter(yy -> yy.getStr("user_name").equals(tt.getStr("user_name"))).findAny();
 
-                                    if (optionalEntity.isPresent()) {
-                                        Entity ooEntity = optionalEntity.get();
-                                        xxDict.set("用户姓名", ooEntity.getStr("nick_name"));
-                                    } else {
-                                        xxDict.set("用户姓名", "");
-                                    }
-                                    xxDict.set("登录ip", tt.getStr("ipaddr"));
-                                    xxDict.set("登录位置", tt.getStr("login_location"));
-                                    xxDict.set("浏览器", tt.getStr("browser"));
-                                    xxDict.set("操作系统", tt.getStr("os"));
-                                    xxDict.set("结果", tt.getStr("msg"));
-                                    xxDict.set("登录时间", DateUtil.formatDateTime(tt.getDate("login_time")));
-                                    return xxDict;
-                                }
-                        )
-                        .toList();
+                            if (optionalEntity.isPresent()) {
+                                Entity ooEntity = optionalEntity.get();
+                                xxDict.set("用户姓名", ooEntity.getStr("nick_name"));
+                            } else {
+                                xxDict.set("用户姓名", "");
+                            }
+                            xxDict.set("登录ip", tt.getStr("ipaddr"));
+                            xxDict.set("登录位置", tt.getStr("login_location"));
+                            xxDict.set("浏览器", tt.getStr("browser"));
+                            xxDict.set("操作系统", tt.getStr("os"));
+                            xxDict.set("结果", tt.getStr("msg"));
+                            xxDict.set("登录时间", DateUtil.formatDateTime(tt.getDate("login_time")));
+                            return xxDict;
+                        }
+                ).toList();
 
                 Dict dict = Dict.create()
                         .set("total", result.getTotal())
@@ -155,30 +154,29 @@ public class CcTestController extends BaseController {
 
         if (result.getTotal() > 0) {
             List<Dict> dataList = result.stream().map(tt -> {
-                                Dict dict = Dict.create();
+                        Dict dict = Dict.create();
 
-                                dict.set("id", tt.getStr("id"));
-                                dict.set("fileExtension", tt.getStr("file_extension"));
-                                dict.set("fileMd5", tt.getStr("file_md5"));
-                                dict.set("fileSize", tt.getLong("file_size"));
-                                dict.set("url", tt.getStr("url"));
-                                dict.set("originalFileName", tt.getStr("original_file_name"));
-                                dict.set("title", tt.getStr("title"));
-                                dict.set("createTime", DateUtil.formatDateTime(tt.getDate("create_time")));
+                        dict.set("id", tt.getStr("id"));
+                        dict.set("fileExtension", tt.getStr("file_extension"));
+                        dict.set("fileMd5", tt.getStr("file_md5"));
+                        dict.set("fileSize", tt.getLong("file_size"));
+                        dict.set("url", tt.getStr("url"));
+                        dict.set("originalFileName", tt.getStr("original_file_name"));
+                        dict.set("title", tt.getStr("title"));
+                        dict.set("createTime", DateUtil.formatDateTime(tt.getDate("create_time")));
 
-                                String configJson = tt.getStr("config_json");
-                                if (JSONUtil.isTypeJSONObject(configJson)) {
-                                    JSONObject jsonObjectConfig = JSONUtil.parseObj(configJson);
-                                    JSONArray tagsArray = jsonObjectConfig.getJSONArray("tags");
-                                    dict.set("tags", tagsArray == null ? Collections.emptyList() : tagsArray);
-                                } else {
-                                    dict.set("tags", Collections.emptyList());
-                                }
+                        String configJson = tt.getStr("config_json");
+                        if (JSONUtil.isTypeJSONObject(configJson)) {
+                            JSONObject jsonObjectConfig = JSONUtil.parseObj(configJson);
+                            JSONArray tagsArray = jsonObjectConfig.getJSONArray("tags");
+                            dict.set("tags", tagsArray == null ? Collections.emptyList() : tagsArray);
+                        } else {
+                            dict.set("tags", Collections.emptyList());
+                        }
 
-                                return dict;
-                            }
-                    )
-                    .toList();
+                        return dict;
+                    }
+            ).toList();
 
             var resultDict = Dict.create()
                     .set("total", result.getTotal())
