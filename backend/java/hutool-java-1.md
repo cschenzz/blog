@@ -9,7 +9,7 @@
 6. 自定义线程池-ExecutorBuilder, 高并发测试-ConcurrencyTester
 7. 图片工具-ImgUtil, 网络工具-NetUtil, URL生成器-UrlBuilder
 8. JSON工具-JSONUtil, JSON对象-JSONObject, JSON数组-JSONArray
-9. 摘要加密-Digester, 签名和验证-Sign, 国密算法工具-SmUtil
+9. 安全相关(SecureUtil), 摘要加密-Digester(DigestUtil), 签名和验证-Sign(SignUtil), 国密算法工具-SmUtil, md5摘要(DigestUtil.md5Hex, SecureUtil.md5)
 10. 数据库简单操作-Db
 11. Http客户端工具类-HttpUtil
 12. 简易Http服务器-SimpleServer
@@ -398,4 +398,4 @@ System.out.println(validFileName);
 ```
 
 ---------------------
-- [hutool 文档](https://hutool.cn/docs/index.html)
+- [hutool 文档](https://hutool.cn/docs/index.html) | [加密解密（Hutool-crypto）](https://hutool.cn/docs/index.html#/crypto/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E5%B7%A5%E5%85%B7-SecureUtil)
