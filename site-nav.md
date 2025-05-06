@@ -16,11 +16,11 @@
 - [金山iCiba翻译](http://www.iciba.com/)
 
 ## 🍊智能AI
-- [阿里云-通义千问](https://tongyi.aliyun.com/qianwen/)
+- [阿里云-通义千问](https://www.tongyi.com/qianwen/)
 - [DeepSeek Chat](https://chat.deepseek.com/)
 - [抖音AI-豆包](https://www.doubao.com/)
-- [智谱清言AI](https://chatglm.cn/)
 - [腾讯元宝](https://yuanbao.tencent.com/)
+- [智谱清言AI](https://chatglm.cn/)
 - [百度-文心一言](https://yiyan.baidu.com/)
 -------------------------------------------------------------------------------
 
