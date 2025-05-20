@@ -134,6 +134,16 @@ String jsonText = """
 
 JSONObject tmpJsonObject = new JSONObject(jsonText);
 
+// 使用optional获取层次比较深的数据并在获取到数据后做处理(ifPresent, ifPresentOrElse)
+Optional.of(tmpJsonObject)
+        .map(oo -> oo.getJSONObject("user"))
+        .map(oo -> oo.getInt("age"))
+        .ifPresentOrElse(age -> {
+            Console.log("age={}", age);
+        }, () -> {
+            Console.error("未获取到age数据");
+        });
+
 // 99
 int tmpAge = Optional.ofNullable(tmpJsonObject)
         .map(oo -> oo.getJSONObject("user"))
