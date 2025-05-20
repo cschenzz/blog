@@ -27,6 +27,17 @@ LambdaQueryWrapper<SysUserEntity> queryWrapper = new LambdaQueryWrapper<>();
 // queryWrapper.select(SysUserEntity::getUserId, SysUserEntity::getLoginName, SysUserEntity::getAvatar, SysUserEntity::getPhonenumber);
 queryWrapper.eq(SysUserEntity::getLoginName, "chenzz")
         .gt(SysUserEntity::getUserId, 100);
+
+// -----------------
+// 使用apply方法拼接 sql
+// 例1: apply("id = 1")
+// 例2: apply("date_format(dateColumn,'%Y-%m-%d') = '2008-08-08'")
+// 例3: apply("date_format(dateColumn,'%Y-%m-%d') = {0}", LocalDate.now())
+// 例4: apply("name={0,javaType=int,jdbcType=NUMERIC,typeHandler=xxx.xxx.MyTypeHandler}", "老王")
+// 搜索json字段, 搜索指定区域的管理员
+queryWrapper.apply("JSON_CONTAINS(config_json,JSON_OBJECT('region_ids', {0}))", 360700)
+// -----------------
+
 // 查询时排序, 分组(删除可以不需要)
 // 多字段排序, 优先级高的放前面,优先级低在后面
 queryWrapper.orderByAsc(SysUserEntity::getUserType, SysUserEntity::getStatus)
