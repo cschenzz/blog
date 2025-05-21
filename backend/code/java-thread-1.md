@@ -53,6 +53,16 @@ void test07() {
     assertFalse(cf.isDone());
     // sleepEnough();
     assertTrue(cf.isDone());
+
+    // -------启用异步线程执行耗时任务--------
+    // 打印 1, 4, 2, 3
+    Console.log("1");
+    CompletableFuture.runAsync(() -> {
+        Console.log("2.开始执行异步线程");
+        cn.hutool.core.thread.ThreadUtil.safeSleep(5000);
+        Console.log("3.线程任务结束");
+    });
+    Console.log("4");
 }
 
 @DisplayName("CompletableFuture测试")
