@@ -206,7 +206,7 @@ public class MyBatisPlus3xTests {
         boolean result = userService.update(wrapper);
         System.out.println("update result=" + result);
         // =========================================
-        int rows = userMapper.update(null, wrapper);
+        int rows = userMapper.update(wrapper);
         System.out.println(rows + " rows affected");
         // =========================================
         // 所有更新成功标志(使用&&运算符)
@@ -271,7 +271,7 @@ public class MyBatisPlus3xTests {
         // -------------------
         updateWrapper.eq(SysUserEntity::getUserId, 100);
 
-        int rows = userMapper.update(null, updateWrapper);
+        int rows = userMapper.update(updateWrapper);
         System.out.println(rows + " rows affected");
         assertThat(rows).isGreaterThan(-1);
     }
