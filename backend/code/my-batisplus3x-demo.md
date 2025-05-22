@@ -86,7 +86,7 @@ int result = userMapper.update(Wrappers.<SysUserEntity>lambdaUpdate().set(SysUse
 // UPDATE test SET data = JSON_REMOVE(data, '$.age') WHERE id = 1;
 
 // 根据id更新json字段
-// sql: UPDATE sys_user SET config_json = JSON_SET(config_json, '$.accountType', 99) WHERE deleted = 0 AND (id = ?)
+// sql: UPDATE sys_user SET config_json = JSON_SET(config_json, '$.accountType', 99) WHERE deleted = 0 AND (user_id = ?)
 int updateRows = userMapper.update(Wrappers.<SysUserEntity>lambdaUpdate()
     .setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.accountType', {})", 99))
     .eq(SysUserEntity::getUserId, 1L)
