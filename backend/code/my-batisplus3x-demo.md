@@ -34,8 +34,8 @@ queryWrapper.eq(SysUserEntity::getLoginName, "chenzz")
 // 例2: apply("date_format(dateColumn,'%Y-%m-%d') = '2008-08-08'")
 // 例3: apply("date_format(dateColumn,'%Y-%m-%d') = {0}", LocalDate.now())
 // 例4: apply("name={0,javaType=int,jdbcType=NUMERIC,typeHandler=xxx.xxx.MyTypeHandler}", "老王")
-// 搜索json字段, 搜索指定区域的管理员
-queryWrapper.apply("JSON_CONTAINS(config_json,JSON_OBJECT('region_ids', {0}))", 360700)
+// 搜索json字段, 搜索指定区域的管理员(region_ids是一个地区数组)
+queryWrapper.apply("JSON_CONTAINS(config_json,JSON_OBJECT('region_ids', {0}))", 360700);
 // -----------------
 
 // 查询时排序, 分组(删除可以不需要)
@@ -64,12 +64,20 @@ LambdaUpdateWrapper<SysUserEntity> updateWrapper = new LambdaUpdateWrapper<>();
 updateWrapper.set(SysUserEntity::getLoginName, "chenzz")
         .set(SysUserEntity::getEmail, "chenzz@qq.com")
         .set(SysUserEntity::getPhonenumber, "13800138000")
-        // 清空字段
+        // 清空字段(设为null)
         .set(SysUserEntity::getLoginDate, null)
         // ---------where----------
-        .eq(SysUserEntity::getUserId, 100);
+        .ge(SysUserEntity::getStatus, 1);
 
+// 扣减用户金额
+updateWrapper.setDecrBy(SysUserEntity::getMoney, BigDecimal.valueOf(99.9));
+// 增加登录次数
+updateWrapper.setIncrBy(SysUserEntity::getLoginCount, 1);
+
+//  ---------where(and)----------
+updateWrapper.eq(SysUserEntity::getUserId, 100);
 int rows = userMapper.update(updateWrapper);
+
 
 // 2.使用Wrappers实现
 int result = userMapper.update(Wrappers.<SysUserEntity>lambdaUpdate().set(SysUserEntity::getEmail, "czz@qq.com").eq(SysUserEntity::getUserId, 100));
@@ -221,11 +229,20 @@ public class MyBatisPlus3xTests {
      */
     @Test
     void testWrapper() {
+        // -------------1-----------------------------
         // 查询(delete删除也可以用此类wrapper)
         // SELECT * FROM sys_user WHERE del_flag=0 AND (login_name = ? AND user_id > ?) GROUP BY sex ORDER BY user_type ASC,status ASC,create_time DESC
         LambdaQueryWrapper<SysUserEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SysUserEntity::getLoginName, "chenzz")
                 .gt(SysUserEntity::getUserId, 100);
+
+        // 拼接 查询where条件sql
+        // 例1: apply("id = 1")
+        // 例2: apply("date_format(dateColumn,'%Y-%m-%d') = '2008-08-08'")
+        // 例3: apply("date_format(dateColumn,'%Y-%m-%d') = {0}", LocalDate.now())
+        // 例4: apply("name={0,javaType=int,jdbcType=NUMERIC,typeHandler=xxx.xxx.MyTypeHandler}", "老王")
+        queryWrapper.apply("JSON_CONTAINS(config_json,JSON_OBJECT('region_ids', {0}))", 360700);
+
         // 多字段排序, 优先级高的放前面,优先级低的在后面
         queryWrapper.orderByAsc(SysUserEntity::getUserType, SysUserEntity::getStatus)
                 .orderByDesc(SysUserEntity::getCreateTime)
@@ -236,14 +253,23 @@ public class MyBatisPlus3xTests {
 
         List<SysUserEntity> list = userMapper.selectList(queryWrapper);
         printList(list);
-        // ------------------------------------------
+
+        // -------------2-----------------------------
         // 更新
         LambdaUpdateWrapper<SysUserEntity> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.set(SysUserEntity::getLoginName, "chenzz")
                 .set(SysUserEntity::getEmail, "chenzz@qq.com")
-                .set(SysUserEntity::getPhonenumber, "13800138000")
-                // -------------------
-                .eq(SysUserEntity::getUserId, 100);
+                .set(SysUserEntity::getPhonenumber, "13800138000");
+
+        // 扣减用户金额
+        updateWrapper.setDecrBy(SysUserEntity::getMoney, BigDecimal.valueOf(99.9));
+        // 增加登录次数
+        updateWrapper.setIncrBy(SysUserEntity::getLoginCount, 1);
+        // 更新JSON字段
+        updateWrapper.setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.accountType', {})", 99));
+
+        // -------------------
+        updateWrapper.eq(SysUserEntity::getUserId, 100);
 
         int rows = userMapper.update(null, updateWrapper);
         System.out.println(rows + " rows affected");
