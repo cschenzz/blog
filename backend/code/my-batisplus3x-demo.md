@@ -73,6 +73,24 @@ int rows = userMapper.update(updateWrapper);
 
 // 2.使用Wrappers实现
 int result = userMapper.update(Wrappers.<SysUserEntity>lambdaUpdate().set(SysUserEntity::getEmail, "czz@qq.com").eq(SysUserEntity::getUserId, 100));
+
+// ----------3----------
+// 更新json字段数据
+// JSON_SET, 用于设置或更新JSON对象中的键值对5。如果键不存在，则添加新键值对；如果键已存在，则更新其值5。
+// UPDATE test SET data = JSON_SET(data, '$.age', 31) WHERE id = 1;
+
+// JSON_REPLACE, 仅当键已存在时替换其值，不会添加新键5。 示例： 1
+// UPDATE test SET data = JSON_REPLACE(data, '$.age', 32) WHERE id = 1;
+
+// JSON_REMOVE, 用于删除JSON对象中的指定键值
+// UPDATE test SET data = JSON_REMOVE(data, '$.age') WHERE id = 1;
+
+// 根据id更新json字段
+// sql: UPDATE sys_user SET config_json = JSON_SET(config_json, '$.accountType', 99) WHERE deleted = 0 AND (id = ?)
+int updateRows = userMapper.update(Wrappers.<SysUserEntity>lambdaUpdate()
+    .setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.accountType', {})", 99))
+    .eq(SysUserEntity::getUserId, 1L)
+);
 ```
 ----------------------------------
 
