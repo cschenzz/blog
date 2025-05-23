@@ -268,7 +268,7 @@ public class MyBatisPlus3xTests {
         // 更新JSON字段
         updateWrapper.setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.accountType', {})", 99));
 
-        // -------------------
+        // --------where更新条件-----------
         updateWrapper.eq(SysUserEntity::getUserId, 100);
 
         int rows = userMapper.update(updateWrapper);
