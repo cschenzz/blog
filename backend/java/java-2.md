@@ -178,20 +178,20 @@ public enum OperateEnum {
 
     // -------------------------------------------------
 
-    OperateEnum(int key, String des) {
+    OperateEnum(int key, String desc) {
         this.key = key;
-        this.des = des;
+        this.desc = desc;
     }
 
     private final int key;
-    private final String des;
+    private final String desc;
 
     public int getKey() {
         return key;
     }
 
-    public String getDes() {
-        return des;
+    public String getDesc() {
+        return desc;
     }
 
     /**
@@ -243,5 +243,30 @@ public enum HttpMethod {
 public enum ActionStatus {
     SUCCESS,
     FAIL,
+}
+
+// ================4==================
+package com.example.enums;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+/**
+ * @author chenzz
+ * 登录类型
+ */
+@Getter
+@AllArgsConstructor
+public enum LoginTypeEnum {
+    WEIXIN_H5("weixin_h5", "微信h5"),
+    H5("h5", "H5"),
+    WECHAT("wechat", "公众号"),
+    APP("app", "APP"),
+    PC("pc", "pc网页"),
+    ROUNTINE("routine", "小程序");
+
+    private final String value;
+    private final String desc;
+
 }
 ```
