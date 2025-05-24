@@ -319,6 +319,17 @@ public class ServiceRegionServiceImpl implements IServiceRegionService {
         // ---------------where--------------
         updateWrapper.eq(ServiceRegion::getId, editDto.getId());
         return serviceRegionMapper.update(updateWrapper) > 0;
+
+        // --------更新JSON字段(array)--------
+        // var tags = List.of("java", "javascript", "python", "c");
+        // var __tags = tags.stream().map(oo -> "'" + oo + "'").toList();
+        // serviceRegionMapper.update(Wrappers.<ServiceRegion>lambdaUpdate()
+        //        .setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.tags', JSON_ARRAY({}))", String.join(",", __tags)))
+        //        .set(ServiceRegion::getUpdateTime, LocalDateTime.now())
+        //        .eq(ServiceRegion::getId, 1));
+
+        // ----------------------------------
+        // ----------------------------------
     }
 
     @Override
