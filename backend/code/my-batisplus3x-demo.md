@@ -95,6 +95,7 @@ int result = userMapper.update(Wrappers.<SysUserEntity>lambdaUpdate().set(SysUse
 
 // 根据id更新json字段
 // sql: UPDATE sys_user SET config_json = JSON_SET(config_json, '$.accountType', 99) WHERE deleted = 0 AND (user_id = ?)
+// updateWrapper.setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.remark', {})", "'手机验证码登录'"))
 int updateRows = userMapper.update(Wrappers.<SysUserEntity>lambdaUpdate()
     .setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.accountType', {})", 99))
     .eq(SysUserEntity::getUserId, 1L)
@@ -265,7 +266,8 @@ public class MyBatisPlus3xTests {
         updateWrapper.setDecrBy(SysUserEntity::getMoney, BigDecimal.valueOf(99.9));
         // 增加登录次数
         updateWrapper.setIncrBy(SysUserEntity::getLoginCount, 1);
-        // 更新JSON字段
+        // 更新JSON字段, json字符串必须使用单引号引用
+        // updateWrapper.setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.remark', {})", "'微信公众号登录'"))
         updateWrapper.setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.accountType', {})", 99));
 
         // --------where更新条件-----------
