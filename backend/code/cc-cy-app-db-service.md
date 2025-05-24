@@ -459,6 +459,12 @@ public class ExamQuestionServiceImpl implements IExamQuestionService {
                     .eq(ObjectUtil.isNotNull(queryDto.getQuestionType()), ExamQuestion::getQuestionType, queryDto.getQuestionType())
                     .eq(ObjectUtil.isNotNull(queryDto.getStatus()), ExamQuestion::getStatus, queryDto.getStatus())
                     .like(StrUtil.isNotEmpty(queryDto.getTitle()), ExamQuestion::getTitle, queryDto.getTitle());
+
+            // 例1: apply("id = 1")
+            // 例2: apply("date_format(dateColumn,'%Y-%m-%d') = '2008-08-08'")
+            // 例3: apply("date_format(dateColumn,'%Y-%m-%d') = {0}", LocalDate.now())
+            // 例4: apply("name={0,javaType=int,jdbcType=NUMERIC,typeHandler=xxx.xxx.MyTypeHandler}", "老王")
+            queryWrapper.apply("JSON_CONTAINS(config_json,JSON_OBJECT('tags', {0}))", "'国产'");        
         }
         // ---------------------
         queryWrapper.orderByDesc(ExamQuestion::getCreateTime);
@@ -554,6 +560,9 @@ public class ExamQuestionServiceImpl implements IExamQuestionService {
         }
         if (JSONUtil.isTypeJSON(editDto.getAnswer())) {
             updateWrapper.set(ExamQuestion::getAnswer, editDto.getAnswer());
+            // 更新JSON字段
+            // UPDATE tb_question SET config_json = JSON_SET(config_json, '$.tags', JSON_ARRAY('java', 'javascript', 'c')) WHERE id=1;
+            updateWrapper.setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.type', {})", 99));
         }
         updateWrapper.set(ExamQuestion::getUpdateTime, now)
                 .set(ExamQuestion::getUpdateBy, SecurityUtils.getUsernameText());
