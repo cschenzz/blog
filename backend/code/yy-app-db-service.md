@@ -321,6 +321,7 @@ public class ServiceRegionServiceImpl implements IServiceRegionService {
         return serviceRegionMapper.update(updateWrapper) > 0;
 
         // --------更新JSON字段(array)--------
+        // UPDATE tb_service_region SET config_json = JSON_SET(config_json, '$.tags', JSON_ARRAY('java', 'javascript', 'c')) WHERE id=1;
         // var tags = List.of("java", "javascript", "python", "c");
         // var __tags = tags.stream().map(oo -> "'" + oo + "'").toList();
         // serviceRegionMapper.update(Wrappers.<ServiceRegion>lambdaUpdate()
