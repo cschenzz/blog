@@ -195,6 +195,15 @@ public enum OperateEnum {
     }
 
     /**
+     * 根据key获取对应的枚举
+     * <p>
+     * eg: OperateEnum type = OperateEnum.getEnumByKey(5)
+     */
+    public static OperateEnum getEnumByKey(int key) {
+        return Stream.of(OperateEnum.values()).filter(t -> t.key == key).findAny().orElse(null);
+    }
+
+    /**
      * 根据keys过滤枚举
      *
      * @param keys key集合
