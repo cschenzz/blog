@@ -221,6 +221,8 @@ package com.cc.oox.app.service.impl;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -294,6 +296,9 @@ public class ServiceRegionServiceImpl implements IServiceRegionService {
         Date now = new Date();
         addEntity.setCreateTime(now);
         addEntity.setUpdateTime(now);
+
+        // 添加数据时设置json字段
+        addEntity.setConfigJson(new JSONObject().set("type", 1).set("regionText", "福建厦门").set("tags", List.of("鹭岛", "集美")).set("note", "备注").toString());
         return serviceRegionMapper.insert(addEntity) > 0;
 
         // -------------------------
@@ -329,6 +334,9 @@ public class ServiceRegionServiceImpl implements IServiceRegionService {
         //        .set(ServiceRegion::getUpdateTime, LocalDateTime.now())
         //        .eq(ServiceRegion::getId, 1));
 
+        // --------更新多个JSON字段--------
+        // updateWrapper.setSql(StrUtil.isNotEmpty(reqBody), cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.wx_pay_2', {})", "'" + reqBody + "'"));
+        // updateWrapper.setSql(StrUtil.isNotEmpty(decryptContent), cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.wx_pay_content', {})", "'" + decryptContent + "'"));
         // ----------------------------------
         // ----------------------------------
     }
