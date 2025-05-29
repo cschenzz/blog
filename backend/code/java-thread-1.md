@@ -333,5 +333,36 @@ public class CompletableFutureTests {
 }
 ```
 
+##  ScheduledExecutorService延时任务
+
+`ScheduledExecutorService` 是 Java 并发工具包中用于定时任务调度的接口，它扩展了 `ExecutorService` 接口，提供了延迟执行和周期性执行任务的能力。
+```java
+// 1.执行异步延时任务, 输出1,2,9秒...
+Console.log("---1.start---");
+java.util.concurrent.Executors.newSingleThreadScheduledExecutor().schedule(() -> {
+    // ----------------------------
+    Console.log("9秒异步延时任务执行完成");
+    // ----------------------------
+}, 9, TimeUnit.SECONDS);
+Console.log("---2.end---");
+
+
+// 2.返回ScheduledExecutorService, 用法同上
+public ScheduledExecutorService getExecutor() {
+    // 创建一个固定大小的线程池
+    // java.util.concurrent.Executors.newScheduledThreadPool(5);
+    // ----------------------------------
+    return new ScheduledThreadPoolExecutor(5,
+            new BasicThreadFactory.Builder().namingPattern("schedule-pool-%d").daemon(true).build(),
+            new ThreadPoolExecutor.CallerRunsPolicy()) {
+        @Override
+        public void afterExecute(Runnable r, Throwable t) {
+            super.afterExecute(r, t);
+            printException(r, t);
+        }
+    };
+}
+```
+
 ---------------------
 - [JAVA基于CompletableFuture的流水线并行处理深度实践](https://juejin.cn/post/7124124854747398175)
