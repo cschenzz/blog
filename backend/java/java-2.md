@@ -212,6 +212,8 @@ public enum OperateEnum {
     public static List<OperateEnum> getEnumsByKeys(List<Integer> keys) {
         return Stream.of(OperateEnum.values()).filter(t -> keys.contains(t.key)).collect(Collectors.toList());
     }
+
+    public static final int[] ARRAYS = Stream.of(values()).mapToInt(OperateEnum::getKey).toArray();
 }
 
 
