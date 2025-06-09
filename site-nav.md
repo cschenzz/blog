@@ -47,7 +47,7 @@
 - [语雀](https://www.yuque.com/)
 <!-- ======other===== -->
 - [菜鸟教程](https://www.runoob.com/)
-- [廖雪峰-Python3教程](https://liaoxuefeng.com/books/python/introduction/index.html) | [Java教程](https://liaoxuefeng.com/books/java/introduction/index.html)
+- [廖雪峰-Python3教程](https://liaoxuefeng.com/books/python/introduction/index.html) | [Java教程](https://liaoxuefeng.com/books/java/introduction/index.html) | [JavaScript教程](https://liaoxuefeng.com/books/javascript/introduction/index.html)
 - [书栈网.开源免费书籍](https://www.bookstack.cn/)
 - [WPS学堂](https://www.wps.cn/learning/)
 
