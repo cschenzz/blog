@@ -339,6 +339,30 @@ public class ServiceRegionServiceImpl implements IServiceRegionService {
         // updateWrapper.setSql(StrUtil.isNotEmpty(decryptContent), cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.wx_pay_content', {})", "'" + decryptContent + "'"));
         // ----------------------------------
         // ----------------------------------
+
+
+        // ~~~~~~~~~~~~~~~~~~~~~~~~
+        // 更新json字段时直接更新一个大对象(用函数JSON_OBJECT构造对象), 以下代码片段实际使用时候需要移到return前面
+        java.util.function.BiFunction<String, Object, String> biFunc = (key, value) -> {
+            if (value instanceof String) {
+                return "'" + key + "' , '" + value + "'";
+            }
+            return "'" + key + "' ," + value;
+        };
+        java.util.function.Function<List<String>, String> func = (list) -> String.join(",", list);
+
+        String strSetConfigFieldSql = cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.wx_pay_1', {})", "JSON_OBJECT(" + func.apply(List.of(
+                biFunc.apply("name", "czz"),
+                biFunc.apply("age", 99),
+                biFunc.apply("time", LocalDateTime.now().toString())
+        ))) + ")";
+        System.out.println("sql=" + strSetConfigFieldSql);
+        serviceRegionMapper.update(Wrappers.<ServiceRegion>lambdaUpdate()
+                .set(ServiceRegion::getAddress, "水帘洞")
+                .setSql(cn.hutool.core.util.StrUtil.format("config_json = JSON_SET(config_json, '$.wx_pay_0', {})", "'" + textStr + "'"))
+                .setSql(strSetConfigFieldSql)
+                .eq(ServiceRegion::getId, 3));
+        // ===========================
     }
 
     @Override
