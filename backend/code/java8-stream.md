@@ -129,20 +129,22 @@ optionalDict.ifPresent(mm -> {
 ## Optional读取json示例
 ```java
 String jsonText = """
-        {"user":{"name":"tom","age":99,"location":{"lat":24.56,"lng":118.06}},"roles":["admin","sales"],"uid":99}
+        {"user":{"name":"tom","age":99,"location":{"lat":24.56,"lng":118.06}},"roles":["admin","sales"],"uid":8}
         """;
 
 JSONObject tmpJsonObject = new JSONObject(jsonText);
 
-// 使用optional的filter过滤后获取层次比较深的数据并在获取到数据后做处理(ifPresent, ifPresentOrElse)
+// 使用optional的filter和map过滤并获取层次比较深的数据并在获取到数据后做处理(ifPresent, ifPresentOrElse)
 Optional.of(tmpJsonObject)
-        .filter(oo -> oo.getInt("uid") > 1)
+        // .filter(oo -> oo.getInt("uid") > 1)
         .map(oo -> oo.getJSONObject("user"))
-        .map(oo -> oo.getInt("age"))
-        .ifPresentOrElse(age -> {
-            Console.log("age={}", age);
+        .filter(oo -> oo.getInt("age") > 20)
+        .map(oo -> oo.getJSONObject("location"))
+        .map(oo -> oo.getDouble("lat"))
+        .ifPresentOrElse(lat -> {
+            Console.log("纬度(lat)={}", lat);
         }, () -> {
-            Console.error("未获取到age数据");
+            Console.error("未获取到纬度(lat)数据");
         });
 
 // 99
