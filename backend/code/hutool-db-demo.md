@@ -246,6 +246,21 @@ Db.use(getDs()).tx(txDb -> {
 });
 ```
 
+## json字段更新示例
+```java
+// int rows = db.execute(StrUtil.format("update sys_user set config_json = JSON_SET(config_json, '$.accountType', 99) where id=?"), 5);
+// int rows = db.execute(StrUtil.format("update sys_user set config_json = JSON_SET(config_json, '$.regionName', '{}') where id=?", "赣州"), 8);
+// 一次性设置多个json的值
+int rows = db.execute(cn.hutool.core.util.StrUtil.format("""
+        update sys_user set config_json = JSON_SET(config_json, '$.desc', '{}'),
+        config_json = JSON_SET(config_json, '$.roles', JSON_ARRAY('开发','销售'))
+        where id=?
+        """, "区域管理员"
+), 9);
+
+Console.log("rows={}", rows);
+```
+
 
 ## 多条件查询构造生成示例
 ```java
