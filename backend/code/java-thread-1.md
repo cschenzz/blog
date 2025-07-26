@@ -345,7 +345,7 @@ import java.util.concurrent.*;
 Console.log("---1.start---");
 java.util.concurrent.Executors.newSingleThreadScheduledExecutor().schedule(() -> {
     // ----------------------------
-    Console.log("9秒异步延时任务执行完成");
+    Console.log("延时9秒异步任务执行完成");
     // ----------------------------
 }, 9, TimeUnit.SECONDS);
 Console.log("---2.end---");
