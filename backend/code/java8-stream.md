@@ -161,6 +161,14 @@ double tmpLat = Optional.ofNullable(tmpJsonObject)
         .orElse(0.0);
 // Optional.of: 参数传null会抛出错误
 // Optional.ofNullable: 参数传null返回空Optional
+
+// 2.获取店铺配置信息中的区域id(没有配置返回0)
+int regionId = Optional.ofNullable(shopDO)
+        .map(StoreShopDO::getConfigJson)
+        .map(JSONUtil::parseObj)
+        .map(oo -> oo.getJSONObject("region"))
+        .map(oo -> oo.getInt("id"))
+        .orElse(0);
 ```
 
 ## java9后新添功能
