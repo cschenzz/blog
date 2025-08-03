@@ -416,6 +416,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.demo.project.mpsample.domain.entity.SysUser;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
@@ -452,6 +453,51 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
         }
         return this.selectList(Wrappers.<SysUser>lambdaQuery().in(SysUser::getUserId, userIds).orderByDesc(SysUser::getUserId));
     }
+
+    //
+    // mybatis自定义sql查询, 更新示例
+    // -----------------------------
+
+    @Select("select IFNULL(sum(pay_price),0) from yshop_store_order " +
+            "where paid=1 and deleted=0 and refund_status=0 and uid=#{uid}")
+    double sumPrice(@Param("uid") Long uid);
+
+    @Select("SELECT IFNULL(sum(pay_price),0) " +
+            " FROM yshop_store_order ${ew.customSqlSegment}")
+    Double todayPrice(@Param(Constants.WRAPPER) Wrapper<StoreOrderDO> wrapper);
+
+    @Select("<script>select IFNULL(sum(pay_price),0)  from yshop_store_order " +
+            "where refund_status=0 and deleted=0 and paid=1  <if test='shopId > 0'> and shop_id = #{shopId} </if></script>")
+    Double sumTotalPrice(@Param("shopId") Long shopId);
+
+    @Select("select id,store_name as goodsName, IFNULL(sum(sales),0) as saleNum " +
+            "from yshop_store_product ${ew.customSqlSegment} group by id order by saleNum desc limit 10")
+    List<ProductTopVO> getGoodsTopList(@Param(Constants.WRAPPER) Wrapper<StoreProductDO> wrapper);
+
+    @Select("select u.id,u.nickname , IFNULL(sum(o.pay_price),0) as price " +
+            "from yshop_user u,yshop_store_order o where u.id= o.uid and o.paid=1 group by u.id order by price desc limit 10")
+    List<UserTopVO> getUserTopList();
+
+    /**
+     * 根据经纬度计算距离(dis字段)
+     */
+    @Select("<script>SELECT *,ROUND(6378.138 * 2 * ASIN(SQRT(POW(SIN((#{lat} * PI() / 180 - lat * PI() / 180" +
+            "    ) / 2),2) + COS(40.0497810000 * PI() / 180) * COS(lat * PI() / 180) * POW(" +
+            "    SIN((#{lng} * PI() / 180 - lng * PI() / 180) / 2),2))) * 1000) AS dis" +
+            "    FROM yshop_store_shop WHERE deleted=0 " +
+            "<if test =\"type > 0\">and type = #{type}</if>" +
+            "<if test =\"name !=null and name !=''\">and name = #{name}</if>" +
+            "<if test =\"shopId > 0\">and id = #{shopId}</if>" +
+            " ORDER BY dis ASC</script>"
+    )
+    List<AppStoreShopVO> getStoreList(@Param("lng") double lng, @Param("lat") double lat,
+                                      @Param("type") int type,
+                                      @Param("name") String name, @Param("shopId") Integer shopId);
+
+
+    @Update("update yshop_store_shop set balance=balance+#{price}" +
+            " where id=#{shopId}")
+    int incMoney(@Param("shopId") Long shopId, @Param("price") BigDecimal price);
 
 }
 ```
