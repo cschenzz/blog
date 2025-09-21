@@ -8,7 +8,6 @@
 </p>
 
 ## 📦置顶链接
-- [西瓜视频](https://www.ixigua.com/)
 - [抖音](https://www.douyin.com/)
 - [Bilibili](https://www.bilibili.com/)
 - [快手](https://www.kuaishou.com/)
