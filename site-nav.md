@@ -26,7 +26,7 @@
 ## ☕技术社区及文档
 计算机技术社区
 
-- [稀土掘金](https://juejin.im)
+- [稀土掘金](https://juejin.cn)
 - [segmentfault.com](https://segmentfault.com)
 - [知乎](https://www.zhihu.com)
 - [开源中国](https://www.oschina.net)
