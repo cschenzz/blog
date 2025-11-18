@@ -15,7 +15,7 @@
 - [金山iCiba翻译](http://www.iciba.com/)
 
 ## 🍊智能AI
-- [阿里云-通义千问](https://www.tongyi.com/qianwen/)
+- [阿里云-千问](https://www.tongyi.com/)
 - [DeepSeek Chat](https://chat.deepseek.com/)
 - [抖音AI-豆包](https://www.doubao.com/)
 - [腾讯元宝](https://yuanbao.tencent.com/)
