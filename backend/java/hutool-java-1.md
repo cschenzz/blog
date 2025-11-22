@@ -34,7 +34,7 @@
 * [计时器工具-TimeInterval](https://hutool.cn/docs/index.html#/core/%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4/%E8%AE%A1%E6%97%B6%E5%99%A8%E5%B7%A5%E5%85%B7-TimeInterval)
 
 
-## int转16进制字符串显示
+## 进制转换
 ```java
 import cn.hutool.core.util.HexUtil;
 
@@ -45,7 +45,40 @@ int code1 = "AaAaAa".hashCode();
 int code2 = "BBAaBB".hashCode();
 System.out.println(HexUtil.toHex(code1));
 System.out.println(HexUtil.toHex(code2));
+
+// --1--.10进制转16进制, 4e
+var hex16 = cn.hutool.core.util.HexUtil.toHex(78);
+System.out.println(hex16);
+
+// --2--.16进制转10进制, 78
+var hex10 = HexUtil.hexToLong("4e");
+System.out.println(hex10);
+
+// --3--.16进制转byte
+// 方法1
+var byteArr = HexUtil.decodeHex("99EE");
+System.out.println(JSONUtil.toJsonStr(byteArr));
+
+// 方法2
+var byteArr2 = javax.xml.bind.DatatypeConverter.parseHexBinary("99EE");
+System.out.println(JSONUtil.toJsonStr(byteArr2));
+
+
+// --4--.byte[]和hex16进制的显示/转换
+byte[] byteArrData = {6, 7, (byte) 200, 9, 10};
+// 1.显示
+for (byte byteItem : byteArrData) {
+    System.out.printf("%02X ", byteItem & 0xFF);
+}
+
+// 2.拼接hex字符
+StringBuilder hexStr = new StringBuilder();
+for (byte byteItem : byteArrData) {
+    hexStr.append(String.format("%02X", byteItem));
+}
+System.out.println("\r\nhex字符串:" + hexStr);
 ```
+
 
 ## 修改文件名
 ```java
