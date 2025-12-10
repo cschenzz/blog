@@ -56,7 +56,7 @@
 - [NPM仓库](https://www.npmjs.com/)
 - [python包仓库](https://pypi.org/)
 - [清华大学镜像站](https://mirrors.tuna.tsinghua.edu.cn/)
-- [coding.net](https://coding.net/)
+- [cnb云原生构建](https://cnb.cool/)
 -------------------------------------------------------------------------------
 
 ## 📝前端文档
