@@ -16,8 +16,8 @@
 
 ## 🍊智能AI
 - [阿里云-千问](https://www.qianwen.com/)
-- [DeepSeek Chat](https://chat.deepseek.com/)
 - [抖音AI-豆包](https://www.doubao.com/)
+- [腾讯IMA工作台](https://ima.qq.com/)
 - [腾讯元宝](https://yuanbao.tencent.com/)
 - [智谱清言AI](https://chatglm.cn/)
 - [百度-文心一言](https://yiyan.baidu.com/)
