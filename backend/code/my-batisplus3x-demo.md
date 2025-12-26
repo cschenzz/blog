@@ -347,8 +347,9 @@ public class MyBatisPlus3xTests {
         // ----------------------------------------------------------------
         System.err.println("根据id主键查询：" + userService.getById(id).toString());
         // userMapper.selectById(id);
+        // 针对selectOne可以使用last在结尾添加sql, 保证只有1条记录
         System.err.println("查询单个：" +
-                userMapper.selectOne(Wrappers.<SysUserEntity>lambdaQuery().eq(SysUserEntity::getLoginName, "czz"))
+                userMapper.selectOne(Wrappers.<SysUserEntity>lambdaQuery().eq(SysUserEntity::getLoginName, "czz").last("limit 1"))
                         .toString());
         assertThat(id > 0).isTrue();
     }
