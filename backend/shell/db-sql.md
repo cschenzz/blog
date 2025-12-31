@@ -69,6 +69,9 @@ select * from goods go left join category ca on go.typeId=ca.typeId;
 
 # 扩充需求: 以分类为主展示所有内容(以哪张表为主表, 显示结果上是有区别的!)
 select * from category ca left join goods go on ca.typeId=go.typeId; 
+
+# json字段查询, json字段为config_josn, json值假设为: {"province":"广东省","city":"广州市"}
+select * from sys_user where json_extract(config_json, '$.province') = "广东省"
 ```
 
 
@@ -82,8 +85,8 @@ redis-cli --version
 #  客户端连接, 连接本机
 redis-cli
 
-# 连接指定服务器, 指定端口
-redis-cli -h 127.0.0.1 -p 6379
+# 连接指定服务器, 指定端口, 指定密码-a
+redis-cli -h 127.0.0.1 -p 6379 -a your_password
 
 # 参看各种信息
 info
