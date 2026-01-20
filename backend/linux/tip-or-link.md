@@ -12,17 +12,19 @@
 3. node.js: `sudo apt install nodejs`
 4. npm: `sudo apt install npm`
 5. 查看node.js, npm, python版本: `node -v`, `npm -v`, `python3 --version`, python已默认安装3.x版本
-6. neofetch: `sudo apt install neofetch`, neofetch命令用来在命令行中显示系统信息
-7. 安装docker: 参考docker官方网站进行安装
-8. 在docker中安装`mysql8.x, rabbitmq, minio, jenkins, gitea`等
+6. 安装nginx, `sudo apt install nginx`, 安装后使用`nginx -v`查看版本
+7. fastfetch: `sudo apt install fastfetch`, 现代化的系统信息工具(类似 neofetch)
+8. 安装docker: 参考docker官方网站进行安装
+9. 在docker中安装`mysql8.x, rabbitmq, minio, jenkins, gitea`等
 
 ## debian12服务器环境安装
 ```bash
-# 1.安装宝塔
+# 1.安装宝塔(或者https://1panel.cn/)
 wget -O install.sh https://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh ed8484bec
 
 # 2.宝塔里安装mysql, nginx. docker在bt或命令行安装均可
-# 3.通过终端命令安装redis, docker, java环境
+
+# 3.通过终端命令安装nginx, redis, docker, java环境
 sudo apt install openjdk-17-jdk
 # 安装文件上传下载工具(服务器上安装), 配合深度终端实现服务器上文件的上传下载
 sudo apt install lrzsz
