@@ -16,5 +16,10 @@
 - [venge复仇者-射击游戏](https://venge.io/)
 - [乱棍逃亡-花森修复版](http://a.huasen.cc/server/public/app/temple-run/index.html)
 
+
+## 怀旧游戏
+- [网页红井-联机对战平台](https://www.ra2web.com/)
+
+
 ## 游戏平台
 - [TapTap](https://www.taptap.cn/)
