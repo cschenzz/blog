@@ -19,6 +19,7 @@
 
 ## 怀旧游戏
 - [网页红井-联机对战平台](https://www.ra2web.com/)
+- [网页红井-共和国之辉(mod)](https://game.gongheguozhihui.com/)
 
 
 ## 游戏平台
