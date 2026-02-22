@@ -407,16 +407,33 @@ BigDecimal sumTotal = dictList.stream()
         });
 System.out.println("5.购物总花费:" + sumTotal);
 
-// 6.使用flatMap实现过滤+映射
+// 6.1 使用flatMap实现过滤+映射
 var tempYy = dictList.stream()
         .flatMap(oo -> Stream.of(oo).filter(xx -> xx.getInt("stock") > 100).map(xx -> xx.getStr("sku")))
         .findAny();
 // 存在和不存在分别处理(参考代码段1): void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction)
 // 存在: void ifPresent(Consumer<? super T> action)
 tempYy.ifPresent(oo -> {
-    // 打印6.a
-    log.info("6.{}", oo);
+    // 打印6.1. a
+    log.info("6.1. {}", oo);
 });
+
+// 6.2 flatMap合并id列表并去重+排序
+String[] strArr = {"[1,2,3]", "[]", "[3,5]", "[7,8,9]", "[4,5,6]"};
+List<Long> listStr = Stream.of(strArr)
+        .flatMap(oo -> {
+            if (JSONUtil.isTypeJSONArray(oo)) {
+                return JSONUtil.toList(oo, Long.class).stream();
+            }
+            return Stream.empty();
+        })
+        .distinct()
+        .sorted()
+        .toList();
+
+// [1,2,3,4,5,6,7,8,9]
+log.info("6.2 {}", listStr);
+
 
 // 7.计算count, sum, min, max值
 // 示例为对于List列表中某一个字段的统计数据(必须能转换成int, long, double数值类型才可以进行统计)
