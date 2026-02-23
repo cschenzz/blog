@@ -212,6 +212,6 @@ flatpak --help
 
 ---------------------
 - [linux迷](https://www.linuxmi.com/)
-- [Debian官网](https://www.debian.org/index.zh-cn.html) | [Kali Linux](https://www.kali.org/) | [Alpine Linux](https://www.alpinelinux.org/)
+- [Debian官网](https://www.debian.org/index.zh-cn.html) | [Zorin OS](https://zorin.com/os/) | [Fedora](https://www.fedoraproject.org/workstation/) | [Kali Linux](https://www.kali.org/) | [Alpine Linux](https://www.alpinelinux.org/)
 - [Flatpak安装](https://flatpak.org/setup) | [文档](https://docs.flatpak.org/zh_CN/latest/getting-started.html) | [官方仓库](https://flathub.org/)
 - [使用Systemctl命令来管理系统服务](https://zhuanlan.zhihu.com/p/388897743)
