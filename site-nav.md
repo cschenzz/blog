@@ -73,6 +73,7 @@
 - [Mozilla MDN JavaScript文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
 - [现代JavaScript 教程中文版](https://zh.javascript.info)
 - [网道 - JavaScript 教程](https://wangdoc.com/javascript/) | [TypeScript 教程](https://wangdoc.com/typescript/) | [ES6 教程](https://wangdoc.com/es6/)
+- [TypeScript中文文档(冴羽翻译)](https://ts.yayujs.com/)
 - [阮一峰 JavaScript 教程](https://www.bookstack.cn/read/javascript-tutorial/README.md)
 - [阮一峰 ECMAScript 6 (ES6) 标准入门教程 第三版](https://www.bookstack.cn/read/es6-3rd/sidebar.md)
 -------------------------------------------------------------------------------
