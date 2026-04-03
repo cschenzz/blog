@@ -191,7 +191,9 @@ List<Dict> list = CollUtil.newLinkedList(
         Dict.create().set("id", 3).set("name", "太上老君").set("age", 99999)
 );
 log.info("1.dictList: {}", list.size());
+
 // ===========================================
+// 1. Iterator方式删除
 Iterator<Dict> iterator = list.iterator();
 while (iterator.hasNext()) {
     Dict next = iterator.next();
@@ -201,6 +203,9 @@ while (iterator.hasNext()) {
     }
 }
 log.info("2.dictList: {}", list.size());
+
+// 2. removeIf方法删除
+list.removeIf(next -> next.getInt("age") < 100);
 ```
 
 
