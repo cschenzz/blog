@@ -204,7 +204,7 @@ while (iterator.hasNext()) {
 }
 log.info("2.dictList: {}", list.size());
 
-// 2. removeIf方法删除
+// 2. 调用Collection的removeIf方法
 list.removeIf(next -> next.getInt("age") < 100);
 ```
 
