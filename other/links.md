@@ -32,6 +32,7 @@
 - [全历史](https://www.allhistory.com/)
 - [有趣网址之家](https://youquhome.com/)
 - [鲁大师天梯榜(CPU)](http://www.ludashi.com/rank/cpuRanking.html)
+- [俄罗斯搜索引擎yandex](https://yandex.com/)
 -------------------------------------------------------------------------------
 
 
