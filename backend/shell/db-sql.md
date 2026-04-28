@@ -74,6 +74,52 @@ select * from category ca left join goods go on ca.typeId=go.typeId;
 select * from sys_user where json_extract(config_json, '$.province') = "广东省"
 ```
 
+## 建表sql
+```sql
+drop table if exists sys_user;
+CREATE TABLE `sys_user` (
+    -- 自增主键
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `dept_id` BIGINT NULL COMMENT '部门ID',
+
+    -- int, long类
+    `type` TINYINT NOT NULL DEFAULT '0' COMMENT '类型（1.平台用户; 2.app用户; ）',
+    `status` TINYINT NOT NULL DEFAULT '0' COMMENT '状态（0停用 1启用）',
+
+    -- 账号, 密码
+    `user_name` varchar(50) not null comment '用户账号',
+    `password` varchar(100) not null default '' comment '密码',
+
+
+    -- 业务字段
+    `user_no` VARCHAR(50) NULL COMMENT '用户编号' COLLATE 'utf8mb4_unicode_ci',
+    `avatar` varchar(200) null comment '头像地址',
+
+    -- 时间类
+    `log_date` DATE NOT NULL COMMENT '日期',
+    `log_time` TIME NOT NULL COMMENT '时间',
+    `last_login_time` DATETIME NULL COMMENT '最后登陆时间',
+    `price` DECIMAL(8,2) NULL COMMENT '钱包余额',
+
+    -- 通用字段
+    `config_json` json null comment '配置json',
+    `remark` TEXT NULL COMMENT '备注' COLLATE 'utf8mb4_unicode_ci',
+    `deleted` bit(1) NOT NULL DEFAULT b'0' COMMENT '逻辑删除',
+    `tenant_id` BIGINT NOT NULL DEFAULT '0' COMMENT '租户编号',
+    `creator` VARCHAR(64) NULL DEFAULT NULL COMMENT '创建者' COLLATE 'utf8mb4_unicode_ci',
+    `create_time` DATETIME NOT NULL COMMENT '添加时间',
+    `update_time` DATETIME NULL DEFAULT NULL COMMENT '更新时间',
+    `updater` VARCHAR(64) NULL DEFAULT NULL COMMENT '更新者' COLLATE 'utf8mb4_unicode_ci',
+    PRIMARY KEY (`id`) USING BTREE,
+    INDEX `user_name` (`user_name`) USING BTREE
+)
+COMMENT='用户表'
+COLLATE='utf8mb4_unicode_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1
+;
+```
+
 
 ## redis命令
 ```bash
