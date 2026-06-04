@@ -80,7 +80,7 @@ drop table if exists sys_user;
 CREATE TABLE `sys_user` (
     -- 自增主键
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
-    `dept_id` BIGINT NULL COMMENT '部门ID',
+    `dept_id` INT NULL COMMENT '部门ID',
 
     -- int, long类
     `type` TINYINT NOT NULL DEFAULT '0' COMMENT '类型（1.平台用户; 2.app用户; ）',
