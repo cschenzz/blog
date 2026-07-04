@@ -100,7 +100,7 @@ CREATE TABLE `sys_user` (
     `log_date` DATE NOT NULL COMMENT '日期',
     `log_time` TIME NOT NULL COMMENT '时间',
     `last_login_time` DATETIME NULL COMMENT '最后登陆时间',
-    `price` DECIMAL(8,2) NULL COMMENT '钱包余额',
+    `price` DECIMAL(8, 2) NULL DEFAULT 0.00 COMMENT '钱包余额',
 
     -- 通用字段
     `config_json` json null comment '配置json',
