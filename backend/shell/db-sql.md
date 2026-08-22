@@ -94,13 +94,14 @@ CREATE TABLE `sys_user` (
 
     -- 业务字段
     `user_no` VARCHAR(50) NULL COMMENT '用户编号',
-    `avatar` varchar(200) null comment '头像地址',
+    -- 头像可为空
+    `avatar` varchar(200) comment '头像地址',
 
     -- 时间类
     `log_date` DATE NOT NULL COMMENT '日期',
     `log_time` TIME NOT NULL COMMENT '时间',
-    `last_login_time` DATETIME NULL COMMENT '最后登陆时间',
-    `price` DECIMAL(8, 2) NULL DEFAULT 0.00 COMMENT '钱包余额',
+    `last_login_time` DATETIME COMMENT '最后登陆时间',
+    `price` DECIMAL(8, 2) DEFAULT 0.00 COMMENT '钱包余额',
 
     -- 通用字段
     `config_json` json null comment '配置json',
@@ -116,6 +117,22 @@ CREATE TABLE `sys_user` (
 )
 COMMENT='用户表'
 AUTO_INCREMENT=1;
+```
+
+## 添加|修改表字段
+```sql
+-- ~~~~~~~修改列~~~~~~
+-- 备注字段修改字段类型
+ALTER TABLE sys_user
+    MODIFY COLUMN `remark` VARCHAR (800) COMMENT '备注';
+
+-- 将 sys_user 表中的 user_name 字段改名为 username，同时将类型改为 VARCHAR(100)
+ALTER TABLE sys_user CHANGE user_name username VARCHAR(100) NOT NULL;
+
+
+-- 添加列(登陆类型)
+ALTER TABLE sys_user
+    ADD COLUMN `login_type` TINYINT DEFAULT '0' COMMENT '登陆类型';
 ```
 
 
