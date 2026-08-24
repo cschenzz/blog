@@ -121,7 +121,7 @@ AUTO_INCREMENT=1;
 
 ## 添加|修改表字段
 ```sql
--- ~~~~~~~修改列~~~~~~
+-- ~~~~~~~修改字段~~~~~~
 -- 备注字段修改字段类型, 修改字段名 + 类型（使用 CHANGE）
 -- 必须同时指定新字段名和新数据类型（即使只改名字，类型也要重新写一遍）
 -- ALTER TABLE 表名 CHANGE 旧字段名 新字段名 新数据类型 [约束条件];
@@ -132,7 +132,7 @@ ALTER TABLE sys_user
 ALTER TABLE sys_user CHANGE user_name username VARCHAR(100) NOT NULL COMMENT '用户名';
 
 
--- 添加列(登陆类型)
+-- 添加字段(登陆类型)
 ALTER TABLE sys_user
     ADD COLUMN `login_type` TINYINT DEFAULT '0' COMMENT '登陆类型';
 ```
@@ -189,6 +189,8 @@ llen 'test:zoning:tree:all'
 ```
 
 ---------------------
+- [MySQL 备忘清单(QuickRef)](https://quickref.cn/docs/mysql.html)
+- [redis 备忘清单(QuickRef)](https://quickref.cn/docs/redis.html)
 - [MySQL数据库常用命令总结](https://zhuanlan.zhihu.com/p/476887245)
 - [redis 命令参考](http://redisdoc.com/)
 - [mysql中json的使用方式详解](https://www.jb51.net/article/282049.htm#_label0)
