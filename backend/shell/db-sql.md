@@ -121,20 +121,23 @@ AUTO_INCREMENT=1;
 
 ## 添加|修改表字段
 ```sql
--- ~~~~~~~修改字段~~~~~~
--- 备注字段修改字段类型, 修改字段名 + 类型（使用 CHANGE）
--- 必须同时指定新字段名和新数据类型（即使只改名字，类型也要重新写一遍）
--- ALTER TABLE 表名 CHANGE 旧字段名 新字段名 新数据类型 [约束条件];
+-- 1. 修改字段(不修改字段名, 仅修改类型这些)
 ALTER TABLE sys_user
     MODIFY COLUMN `remark` VARCHAR (800) COMMENT '备注';
 
--- 将 sys_user 表中的 user_name 字段改名为 username，同时将类型改为 VARCHAR(100)
-ALTER TABLE sys_user CHANGE user_name username VARCHAR(100) NOT NULL COMMENT '用户名';
+-- 2. 修改字段名 + 类型（使用 CHANGE）
+-- 必须同时指定新字段名和新数据类型（即使只改名字，类型也要重新写一遍）
+-- ALTER TABLE 表名 CHANGE 旧字段名 新字段名 新数据类型 [约束条件];
+-- 将 sys_user 表中的 user_name 字段改名为 login_name，同时将类型改为 VARCHAR(100)
+ALTER TABLE sys_user CHANGE `user_name` `login_name` VARCHAR(100) NOT NULL COMMENT '登陆用户名';
 
 
--- 添加字段(登陆类型)
+-- 3. 添加字段(登陆类型)
 ALTER TABLE sys_user
     ADD COLUMN `login_type` TINYINT DEFAULT '0' COMMENT '登陆类型';
+
+-- 4. 删除字段
+ALTER TABLE sys_user DROP COLUMN `login_type`;
 ```
 
 
