@@ -77,6 +77,12 @@ var boolResult = switch (valueStr) {
 
 ## java8时间使用
 ```java
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
+
 // time: 2023-01-02 14:25:59
 LocalDateTime time = LocalDateTime.of(2023, 1, 2, 14, 25, 59);
 // 计算24小时后时间
@@ -107,6 +113,17 @@ log.info("计算间隔时间(天): {}", duration.toDays());
 
 log.info("格式化时间: {}", dayAfter10.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
+
+// 1.时间格式化输出
+// 定义格式：年-月-日 时:分:秒
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+String formatted = now.format(formatter);
+
+// 2.计算两个时间点的差
+Duration duration = Duration.between(time, now);
+System.out.println("两个时间相差(分钟): " + duration.toMinutes());
+
+long daysBetween = ChronoUnit.DAYS.between(time, now);
 ```
 
 
